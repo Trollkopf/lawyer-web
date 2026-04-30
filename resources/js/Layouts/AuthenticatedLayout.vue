@@ -1,10 +1,17 @@
 <script setup>
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 import Dropdown from '@/Components/Dropdown.vue';
 import DropdownLink from '@/Components/DropdownLink.vue';
-import { Link } from '@inertiajs/vue3';
+import { Link, usePage } from '@inertiajs/vue3';
 
 const showingNavigationDropdown = ref(false);
+const page = usePage();
+
+const brandingInitials = computed(() => (page.props.branding?.siteName ?? 'DL')
+    .split(' ')
+    .slice(0, 2)
+    .map((part) => part.charAt(0).toUpperCase())
+    .join(''));
 
 const navigation = [
     {
@@ -52,12 +59,21 @@ const navigation = [
                 <div class="flex min-h-20 items-center justify-between gap-6">
                     <div class="flex items-center gap-8">
                         <Link :href="route('dashboard')" class="flex items-center gap-4">
-                            <div class="flex h-12 w-12 items-center justify-center rounded-full bg-[var(--color-bg-soft)] font-serif text-lg font-semibold text-[var(--color-burgundy)]">
-                                DL
+                            <div
+                                v-if="$page.props.branding?.logoUrl"
+                                class="flex h-12 min-w-[3rem] items-center justify-center rounded-md border border-stone-200 bg-white px-3"
+                            >
+                                <img :src="$page.props.branding.logoUrl" :alt="`Logo de ${$page.props.branding.siteName}`" class="max-h-8 w-auto object-contain">
+                            </div>
+                            <div
+                                v-else
+                                class="flex h-12 w-12 items-center justify-center rounded-full bg-[var(--color-bg-soft)] font-serif text-lg font-semibold text-[var(--color-burgundy)]"
+                            >
+                                {{ brandingInitials }}
                             </div>
                             <div class="hidden sm:block">
                                 <p class="font-serif text-lg font-semibold text-stone-900">
-                                    Panel del despacho
+                                    {{ $page.props.branding?.siteName || 'Panel del despacho' }}
                                 </p>
                                 <p class="text-sm text-stone-500">
                                     Gestion de contenidos

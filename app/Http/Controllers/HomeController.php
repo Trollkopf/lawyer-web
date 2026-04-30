@@ -24,6 +24,9 @@ class HomeController extends Controller
         $settings['hero_image_url'] = $rawSettings?->hero_image_path
             ? Storage::url($rawSettings->hero_image_path)
             : null;
+        $settings['logo_url'] = $rawSettings?->logo_path
+            ? Storage::url($rawSettings->logo_path)
+            : null;
 
         return Inertia::render('Home', [
             'settings' => $settings,

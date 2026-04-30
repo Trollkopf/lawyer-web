@@ -110,7 +110,16 @@ const initialsFor = (name) => name
         <header class="sticky top-0 z-40 border-b border-[var(--color-border)] bg-white/85 backdrop-blur-xl">
             <div class="site-container flex h-20 items-center justify-between gap-6">
                 <a href="#inicio" class="flex min-w-0 items-center gap-4">
-                    <div class="flex h-12 w-12 items-center justify-center rounded-full border border-[var(--color-border)] bg-[var(--color-bg-soft)] font-serif text-lg font-semibold text-[var(--color-burgundy)]">
+                    <div
+                        v-if="settings.logo_url"
+                        class="flex h-12 min-w-[3rem] items-center justify-center rounded-md border border-[var(--color-border)] bg-white px-3"
+                    >
+                        <img :src="settings.logo_url" :alt="`Logo de ${settings.site_name}`" class="max-h-8 w-auto object-contain">
+                    </div>
+                    <div
+                        v-else
+                        class="flex h-12 w-12 items-center justify-center rounded-full border border-[var(--color-border)] bg-[var(--color-bg-soft)] font-serif text-lg font-semibold text-[var(--color-burgundy)]"
+                    >
                         {{ initialsFor(settings.site_name || 'DL').slice(0, 2) }}
                     </div>
                     <div class="min-w-0">

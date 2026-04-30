@@ -10,6 +10,10 @@ const props = defineProps({
         type: Object,
         required: true,
     },
+    logoUrl: {
+        type: String,
+        default: null,
+    },
     heroImageUrl: {
         type: String,
         default: null,
@@ -26,6 +30,7 @@ const form = useForm({
     office_hours: props.settings.office_hours ?? '',
     meta_title: props.settings.meta_title ?? '',
     meta_description: props.settings.meta_description ?? '',
+    logo: null,
     hero_image: null,
     hero: {
         eyebrow: props.settings.hero?.eyebrow ?? '',
@@ -87,7 +92,7 @@ const submit = () => {
     })).post(route('dashboard.settings.update'), {
         forceFormData: true,
         preserveScroll: true,
-        onSuccess: () => form.reset('hero_image'),
+        onSuccess: () => form.reset('logo', 'hero_image'),
     });
 };
 </script>
@@ -159,6 +164,22 @@ const submit = () => {
                             <InputLabel for="office_address" value="Direccion" />
                             <textarea id="office_address" v-model="form.office_address" rows="3" class="mt-2 block w-full rounded-2xl border-stone-300 px-4 py-3 text-sm shadow-sm focus:border-[var(--color-burgundy)] focus:ring-[var(--color-burgundy)]" />
                             <InputError :message="form.errors.office_address" class="mt-2" />
+                        </div>
+                        <div>
+                            <InputLabel for="logo" value="Logotipo" />
+                            <input id="logo" type="file" accept="image/*" class="mt-2 block w-full rounded-2xl border border-stone-300 px-4 py-3 text-sm" @input="form.logo = $event.target.files[0]" />
+                            <p class="mt-2 text-sm text-stone-500">
+                                Si no cargas logo, la web mostrara las iniciales como fallback.
+                            </p>
+                            <InputError :message="form.errors.logo" class="mt-2" />
+                        </div>
+                        <div v-if="logoUrl" class="rounded-3xl border border-stone-200 p-4">
+                            <p class="text-sm font-semibold text-stone-900">
+                                Logo actual
+                            </p>
+                            <div class="mt-4 flex h-28 items-center justify-center rounded-2xl bg-stone-50 p-4">
+                                <img :src="logoUrl" :alt="`Logo de ${form.site_name}`" class="max-h-full max-w-full object-contain">
+                            </div>
                         </div>
                     </div>
                 </section>

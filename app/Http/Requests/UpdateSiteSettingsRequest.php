@@ -23,6 +23,7 @@ class UpdateSiteSettingsRequest extends FormRequest
             'office_hours' => ['nullable', 'string', 'max:255'],
             'meta_title' => ['nullable', 'string', 'max:255'],
             'meta_description' => ['nullable', 'string', 'max:500'],
+            'logo' => ['nullable', 'image', 'max:4096'],
             'hero_image' => ['nullable', 'image', 'max:4096'],
 
             'hero.eyebrow' => ['nullable', 'string', 'max:255'],

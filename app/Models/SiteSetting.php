@@ -16,6 +16,7 @@ class SiteSetting extends Model
         'office_hours',
         'meta_title',
         'meta_description',
+        'logo_path',
         'hero_image_path',
         'hero',
         'presentation',
@@ -50,6 +51,7 @@ class SiteSetting extends Model
             'office_hours' => 'Lunes a viernes, de 9:00 a 18:00',
             'meta_title' => 'Abogado en Ciudad | Nombre del despacho',
             'meta_description' => 'Despacho juridico en Ciudad. Asesoramiento y defensa legal con un enfoque claro, riguroso y personalizado.',
+            'logo_path' => null,
             'hero_image_path' => null,
             'hero' => [
                 'eyebrow' => 'Despacho legal',
