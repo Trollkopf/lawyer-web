@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref } from 'vue';
+import { computed, onBeforeUnmount, onMounted, ref } from 'vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
 
 const props = defineProps({
@@ -26,6 +26,7 @@ const props = defineProps({
 });
 
 const menuOpen = ref(false);
+const isScrolled = ref(false);
 
 const contactForm = useForm({
     name: '',
@@ -46,13 +47,24 @@ const navigation = [
     { label: 'Contacto', href: '#contacto' },
 ];
 
-const heroMediaStyle = computed(() => {
+const syncScrolledState = () => {
+    if (typeof window === 'undefined') {
+        return;
+    }
+
+    isScrolled.value = window.scrollY > 24;
+};
+
+const heroBackgroundStyle = computed(() => {
     if (!props.settings.hero_image_url) {
-        return {};
+        return {
+            background:
+                'linear-gradient(135deg, rgba(246, 250, 247, 0.98) 0%, rgba(220, 238, 227, 0.94) 44%, rgba(255, 255, 255, 0.9) 100%)',
+        };
     }
 
     return {
-        backgroundImage: `linear-gradient(180deg, rgba(69, 107, 85, 0.14), rgba(31, 36, 33, 0.45)), url(${props.settings.hero_image_url})`,
+        backgroundImage: `linear-gradient(90deg, rgba(247, 249, 246, 0.96) 0%, rgba(247, 249, 246, 0.9) 34%, rgba(247, 249, 246, 0.7) 54%, rgba(31, 36, 33, 0.48) 100%), linear-gradient(180deg, rgba(69, 107, 85, 0.08), rgba(31, 36, 33, 0.18)), url(${props.settings.hero_image_url})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
     };
@@ -90,6 +102,15 @@ const initialsFor = (name) => name
     .slice(0, 2)
     .map((part) => part.charAt(0).toUpperCase())
     .join('');
+
+onMounted(() => {
+    syncScrolledState();
+    window.addEventListener('scroll', syncScrolledState, { passive: true });
+});
+
+onBeforeUnmount(() => {
+    window.removeEventListener('scroll', syncScrolledState);
+});
 </script>
 
 <template>
@@ -132,7 +153,10 @@ const initialsFor = (name) => name
                     </div>
                 </a>
 
-                <nav class="hidden items-center gap-8 lg:flex">
+                <nav
+                    class="hidden items-center gap-8 transition duration-300 lg:flex"
+                    :class="isScrolled ? 'pointer-events-none translate-y-[-0.75rem] opacity-0' : 'translate-y-0 opacity-100'"
+                >
                     <a
                         v-for="item in navigation"
                         :key="item.href"
@@ -193,82 +217,93 @@ const initialsFor = (name) => name
             </div>
         </header>
 
+        <nav
+            class="pointer-events-none fixed left-6 top-1/2 z-50 hidden -translate-y-1/2 transition duration-300 lg:block"
+            :class="isScrolled ? 'translate-x-0 opacity-100' : '-translate-x-8 opacity-0'"
+            aria-label="Navegacion lateral"
+        >
+            <div class="pointer-events-auto side-nav-rail">
+                <a
+                    v-for="item in navigation"
+                    :key="`${item.href}-side`"
+                    :href="item.href"
+                    class="side-nav-link"
+                >
+                    <span class="side-nav-dot" />
+                    <span>{{ item.label }}</span>
+                </a>
+            </div>
+        </nav>
+
         <main>
-            <section id="inicio" class="section-shell pt-16 md:pt-24">
-                <div class="site-container grid gap-14 lg:grid-cols-[1.08fr_0.92fr] lg:items-center">
-                    <div>
-                        <p class="hero-kicker">
-                            {{ settings.hero.eyebrow }}
-                        </p>
-                        <h1 class="hero-title">
-                            {{ settings.hero.title }}
-                        </h1>
-                        <p class="hero-copy">
-                            {{ settings.hero.description }}
-                        </p>
+            <section id="inicio" class="section-shell pt-10 md:pt-16">
+                <div class="site-container">
+                    <div class="hero-stage" :style="heroBackgroundStyle">
+                        <div class="hero-stage-overlay" />
+                        <div class="relative grid min-h-[36rem] gap-10 p-8 md:min-h-[40rem] md:p-12 lg:grid-cols-[minmax(0,1.1fr)_minmax(18rem,0.55fr)] lg:items-end lg:p-16">
+                            <div class="max-w-3xl">
+                                <p class="hero-kicker">
+                                    {{ settings.hero.eyebrow }}
+                                </p>
+                                <h1 class="hero-title">
+                                    {{ settings.hero.title }}
+                                </h1>
+                                <p class="hero-copy">
+                                    {{ settings.hero.description }}
+                                </p>
 
-                        <div class="mt-10 flex flex-col gap-4 sm:flex-row">
-                            <a :href="settings.hero.primary_target" class="cta-primary">
-                                {{ settings.hero.primary_label }}
-                            </a>
-                            <a
-                                v-if="settings.hero.secondary_label"
-                                :href="settings.hero.secondary_target"
-                                class="cta-secondary"
-                            >
-                                {{ settings.hero.secondary_label }}
-                            </a>
-                        </div>
+                                <div class="mt-10 flex flex-col gap-4 sm:flex-row">
+                                    <a :href="settings.hero.primary_target" class="cta-primary">
+                                        {{ settings.hero.primary_label }}
+                                    </a>
+                                    <a
+                                        v-if="settings.hero.secondary_label"
+                                        :href="settings.hero.secondary_target"
+                                        class="cta-secondary hero-secondary-button"
+                                    >
+                                        {{ settings.hero.secondary_label }}
+                                    </a>
+                                </div>
 
-                        <div class="mt-12 grid gap-4 sm:grid-cols-3">
-                            <div class="hero-stat">
-                                <p class="text-xs font-semibold uppercase tracking-[0.22em] text-[var(--color-burgundy)]">
-                                    Ciudad
-                                </p>
-                                <p class="mt-3 font-sans text-xl font-semibold uppercase tracking-[-0.03em] text-[var(--color-text)]">
-                                    {{ settings.site_city }}
-                                </p>
+                                <div class="mt-12 grid gap-4 sm:grid-cols-3">
+                                    <div class="hero-stat">
+                                        <p class="text-xs font-semibold uppercase tracking-[0.22em] text-[var(--color-burgundy)]">
+                                            Ciudad
+                                        </p>
+                                        <p class="mt-3 font-sans text-xl font-semibold uppercase tracking-[-0.03em] text-[var(--color-text)]">
+                                            {{ settings.site_city }}
+                                        </p>
+                                    </div>
+                                    <div class="hero-stat">
+                                        <p class="text-xs font-semibold uppercase tracking-[0.22em] text-[var(--color-burgundy)]">
+                                            Contacto
+                                        </p>
+                                        <p class="mt-3 text-sm leading-7 text-[var(--color-text)]">
+                                            {{ settings.primary_phone }}
+                                        </p>
+                                    </div>
+                                    <div class="hero-stat">
+                                        <p class="text-xs font-semibold uppercase tracking-[0.22em] text-[var(--color-burgundy)]">
+                                            Enfoque
+                                        </p>
+                                        <p class="mt-3 text-sm leading-7 text-[var(--color-text)]">
+                                            {{ settings.site_tagline }}
+                                        </p>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="hero-stat">
-                                <p class="text-xs font-semibold uppercase tracking-[0.22em] text-[var(--color-burgundy)]">
-                                    Contacto
-                                </p>
-                                <p class="mt-3 text-sm leading-7 text-[var(--color-text)]">
-                                    {{ settings.primary_phone }}
-                                </p>
-                            </div>
-                            <div class="hero-stat">
-                                <p class="text-xs font-semibold uppercase tracking-[0.22em] text-[var(--color-burgundy)]">
-                                    Enfoque
-                                </p>
-                                <p class="mt-3 text-sm leading-7 text-[var(--color-text)]">
-                                    {{ settings.site_tagline }}
-                                </p>
-                            </div>
-                        </div>
-                    </div>
 
-                    <div class="relative">
-                        <div class="absolute -left-6 top-12 hidden h-32 w-32 border border-[var(--color-gold-soft)]/40 lg:block" />
-                        <div class="hero-media-shell">
-                            <div
-                                class="relative min-h-[32rem] rounded-lg border border-white/20 bg-[linear-gradient(135deg,rgba(220,238,227,0.72),rgba(255,255,255,0.18))]"
-                                :style="heroMediaStyle"
-                            >
-                                <div class="absolute inset-0 bg-[linear-gradient(180deg,rgba(19,22,20,0.08),rgba(19,22,20,0.52))]" />
-                                <div class="relative flex min-h-[32rem] flex-col justify-between p-8 md:p-10">
-                                    <div class="hero-chip self-end">
+                            <div v-if="settings.hero.highlight_title || settings.hero.highlight_text" class="flex lg:justify-end">
+                                <div class="hero-highlight">
+                                    <div class="hero-chip mb-6 w-fit">
                                         {{ settings.site_city }}
                                     </div>
-
-                                    <div class="hero-highlight">
-                                        <p class="font-sans text-xl font-semibold uppercase tracking-[-0.03em] text-[var(--color-text)]">
-                                            {{ settings.hero.highlight_title }}
-                                        </p>
-                                        <p class="mt-4 text-sm leading-7 text-[var(--color-text-muted)]">
-                                            {{ settings.hero.highlight_text }}
-                                        </p>
-                                    </div>
+                                    <p v-if="settings.hero.highlight_title" class="font-sans text-xl font-semibold uppercase tracking-[-0.03em] text-[var(--color-text)]">
+                                        {{ settings.hero.highlight_title }}
+                                    </p>
+                                    <p v-if="settings.hero.highlight_text" class="mt-4 text-sm leading-7 text-[var(--color-text-muted)]">
+                                        {{ settings.hero.highlight_text }}
+                                    </p>
                                 </div>
                             </div>
                         </div>

@@ -74,20 +74,40 @@
         @apply mt-6 max-w-xl text-base leading-8 text-[var(--color-text-muted)] md:text-lg;
     }
 
-    .hero-stat {
-        @apply rounded-lg border border-[var(--color-border)] bg-white p-5 shadow-sm;
+    .hero-stage {
+        @apply relative isolate overflow-hidden rounded-[2rem] border border-[var(--color-border)] shadow-[0_34px_90px_rgba(31,36,33,0.12)];
     }
 
-    .hero-media-shell {
-        @apply overflow-hidden rounded-xl border border-[var(--color-border)] bg-white p-3 shadow-[0_28px_70px_rgba(31,36,33,0.12)];
+    .hero-stage-overlay {
+        @apply pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(109,31,47,0.08),transparent_32%),radial-gradient(circle_at_bottom_left,rgba(69,107,85,0.1),transparent_28%)];
+    }
+
+    .hero-stat {
+        @apply rounded-xl border border-white/60 bg-white/80 p-5 shadow-[0_18px_40px_rgba(31,36,33,0.1)] backdrop-blur-sm;
     }
 
     .hero-chip {
-        @apply rounded-md border border-white/25 bg-black/25 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.3em] text-white backdrop-blur-sm;
+        @apply rounded-md border border-[var(--color-gold-soft)] bg-white/80 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.3em] text-[var(--color-green-dark)] backdrop-blur-sm;
     }
 
     .hero-highlight {
-        @apply max-w-sm rounded-lg border border-black/5 bg-white/90 p-6 shadow-[0_20px_50px_rgba(31,36,33,0.16)] backdrop-blur;
+        @apply max-w-sm rounded-[1.5rem] border border-white/70 bg-white/90 p-6 shadow-[0_20px_50px_rgba(31,36,33,0.16)] backdrop-blur md:p-7;
+    }
+
+    .hero-secondary-button {
+        @apply border-white/65 bg-white/40 text-[var(--color-green-dark)] backdrop-blur-sm hover:bg-white/65;
+    }
+
+    .side-nav-rail {
+        @apply flex flex-col gap-3 rounded-[1.5rem] border border-[var(--color-border)] bg-white/90 p-4 shadow-[0_20px_60px_rgba(31,36,33,0.12)] backdrop-blur;
+    }
+
+    .side-nav-link {
+        @apply inline-flex items-center gap-3 rounded-full px-3 py-2 text-sm font-semibold text-[var(--color-text-muted)] transition hover:bg-[var(--color-bg-soft)] hover:text-[var(--color-burgundy)] focus:outline-none focus:ring-2 focus:ring-[var(--color-burgundy)] focus:ring-offset-2;
+    }
+
+    .side-nav-dot {
+        @apply h-2 w-2 rounded-full bg-[var(--color-burgundy)];
     }
 
     .surface-panel {
