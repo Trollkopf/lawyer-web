@@ -19,6 +19,14 @@ class SiteSettingsController extends Controller
             SiteSetting::defaults(),
             $setting?->toArray() ?? [],
         );
+        $settings['contact']['privacy_url'] = blank(data_get($settings, 'contact.privacy_url'))
+            || data_get($settings, 'contact.privacy_url') === '#'
+            ? route('privacy-policy')
+            : data_get($settings, 'contact.privacy_url');
+        $settings['contact']['legal_url'] = blank(data_get($settings, 'contact.legal_url'))
+            || data_get($settings, 'contact.legal_url') === '#'
+            ? route('legal-notice')
+            : data_get($settings, 'contact.legal_url');
 
         return Inertia::render('Admin/SiteSettings/Edit', [
             'settings' => $settings,

@@ -9,11 +9,14 @@ use App\Http\Controllers\Admin\TestimonialController;
 use App\Http\Controllers\ContactSubmissionController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LegalPageController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', HomeController::class)->name('home');
 Route::post('/contacto', [ContactSubmissionController::class, 'store'])->name('contact.store');
+Route::get('/politica-de-privacidad', [LegalPageController::class, 'privacy'])->name('privacy-policy');
+Route::get('/aviso-legal', [LegalPageController::class, 'legal'])->name('legal-notice');
 
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', DashboardController::class)->name('dashboard');
