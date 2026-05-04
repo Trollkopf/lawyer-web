@@ -10,7 +10,7 @@ defineProps({
 });
 
 const destroyTestimonial = (testimonial) => {
-    if (!window.confirm(`Eliminar la opinion de "${testimonial.client_name}"?`)) {
+    if (!window.confirm(`Eliminar "${testimonial.client_name}"?`)) {
         return;
     }
 
@@ -34,7 +34,7 @@ const destroyTestimonial = (testimonial) => {
                         Opiniones
                     </h1>
                     <p class="mt-2 text-sm text-stone-500">
-                        Organiza testimonios y reseñas para la seccion de confianza.
+                        Organiza articulos de opinion y reflexiones para la seccion editorial.
                     </p>
                 </div>
                 <Link :href="route('dashboard.testimonials.create')" class="cta-primary">
@@ -44,7 +44,7 @@ const destroyTestimonial = (testimonial) => {
         </template>
 
         <div class="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
-            <div class="grid gap-6 lg:grid-cols-2">
+            <div class="grid gap-6">
                 <article
                     v-for="testimonial in testimonials"
                     :key="testimonial.id"
@@ -57,7 +57,7 @@ const destroyTestimonial = (testimonial) => {
                                     {{ testimonial.client_name }}
                                 </p>
                                 <p class="mt-2 text-sm text-stone-500">
-                                    {{ testimonial.matter || 'Asunto sin especificar' }}
+                                    {{ testimonial.matter || 'Tema sin especificar' }}
                                 </p>
                             </div>
                             <span
@@ -68,10 +68,7 @@ const destroyTestimonial = (testimonial) => {
                             </span>
                         </div>
 
-                        <p class="text-sm tracking-[0.35em] text-[var(--color-gold-soft)]">
-                            {{ '★'.repeat(testimonial.rating || 5) }}
-                        </p>
-                        <p class="text-sm leading-7 text-stone-600">
+                        <p class="whitespace-pre-line text-sm leading-7 text-stone-600">
                             {{ testimonial.quote }}
                         </p>
 
@@ -86,12 +83,12 @@ const destroyTestimonial = (testimonial) => {
                     </div>
                 </article>
 
-                <div v-if="!testimonials.length" class="admin-card text-center lg:col-span-2">
+                <div v-if="!testimonials.length" class="admin-card text-center">
                     <h2 class="font-serif text-2xl text-stone-900">
                         Aun no hay opiniones
                     </h2>
                     <p class="mt-3 text-sm text-stone-500">
-                        Publica aqui reseñas reales cuando el cliente las valide.
+                        Publica aqui articulos u opiniones cuando el contenido este revisado.
                     </p>
                 </div>
             </div>

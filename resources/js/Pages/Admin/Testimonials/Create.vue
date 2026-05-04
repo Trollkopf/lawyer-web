@@ -28,7 +28,7 @@ const submit = () => {
                         Nueva opinion
                     </h1>
                     <p class="mt-2 text-sm text-stone-500">
-                        Crea una reseña lista para publicarse en la home.
+                        Crea una pieza editorial de opinion para publicarse en la home.
                     </p>
                 </div>
                 <Link :href="route('dashboard.testimonials.index')" class="cta-secondary">

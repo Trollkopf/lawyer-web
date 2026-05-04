@@ -6,8 +6,10 @@ import { Head, Link, useForm } from '@inertiajs/vue3';
 const form = useForm({
     title: '',
     challenge: '',
+    diagnosis: '',
     approach: '',
     outcome: '',
+    takeaway: '',
     practice_area: '',
     sort_order: 0,
     is_published: true,

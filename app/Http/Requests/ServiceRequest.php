@@ -16,8 +16,8 @@ class ServiceRequest extends FormRequest
         return [
             'title' => ['required', 'string', 'max:255'],
             'summary' => ['required', 'string'],
-            'target_client' => ['nullable', 'string', 'max:255'],
-            'key_result' => ['nullable', 'string', 'max:255'],
+            'target_client' => ['nullable', 'string'],
+            'key_result' => ['nullable', 'string'],
             'sort_order' => ['nullable', 'integer', 'min:0'],
             'is_published' => ['boolean'],
         ];

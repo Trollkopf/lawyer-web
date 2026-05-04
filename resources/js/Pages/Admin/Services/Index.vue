@@ -21,7 +21,7 @@ const destroyService = (service) => {
 </script>
 
 <template>
-    <Head title="Servicios" />
+    <Head title="Roles" />
 
     <AuthenticatedLayout>
         <template #header>
@@ -31,14 +31,14 @@ const destroyService = (service) => {
                         Backoffice
                     </p>
                     <h1 class="mt-2 font-serif text-3xl text-stone-900">
-                        Servicios
+                        Roles
                     </h1>
                     <p class="mt-2 text-sm text-stone-500">
-                        Gestiona las areas de trabajo mostradas en la portada.
+                        Gestiona los roles profesionales mostrados en la portada.
                     </p>
                 </div>
                 <Link :href="route('dashboard.services.create')" class="cta-primary">
-                    Nuevo servicio
+                    Nuevo rol
                 </Link>
             </div>
         </template>
@@ -67,7 +67,10 @@ const destroyService = (service) => {
                             <h2 class="mt-4 font-serif text-2xl text-stone-900">
                                 {{ service.title }}
                             </h2>
-                            <p class="mt-3 text-sm leading-7 text-stone-600">
+                            <p class="mt-3 text-sm font-semibold uppercase tracking-[0.2em] text-[var(--color-green-dark)]">
+                                Enfoque
+                            </p>
+                            <p class="mt-2 whitespace-pre-line text-sm leading-7 text-stone-600">
                                 {{ service.summary }}
                             </p>
 
@@ -76,15 +79,15 @@ const destroyService = (service) => {
                                     <p class="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-green-dark)]">
                                         Cliente objetivo
                                     </p>
-                                    <p class="mt-2 text-sm leading-7 text-stone-600">
+                                    <p class="mt-2 whitespace-pre-line text-sm leading-7 text-stone-600">
                                         {{ service.target_client || 'Sin definir' }}
                                     </p>
                                 </div>
                                 <div>
                                     <p class="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-green-dark)]">
-                                        Resultado
+                                        Catalogo de servicios
                                     </p>
-                                    <p class="mt-2 text-sm leading-7 text-stone-600">
+                                    <p class="mt-2 whitespace-pre-line text-sm leading-7 text-stone-600">
                                         {{ service.key_result || 'Sin definir' }}
                                     </p>
                                 </div>
@@ -104,7 +107,7 @@ const destroyService = (service) => {
 
                 <div v-if="!services.length" class="admin-card text-center">
                     <h2 class="font-serif text-2xl text-stone-900">
-                        Aun no hay servicios
+                        Aun no hay roles
                     </h2>
                     <p class="mt-3 text-sm text-stone-500">
                         Crea el primero para que aparezca en la portada.

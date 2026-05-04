@@ -19,27 +19,27 @@ defineProps({
 <template>
     <div class="grid gap-6">
         <div class="admin-card">
-            <InputLabel for="title" value="Titulo del servicio" />
+            <InputLabel for="title" value="Nombre del rol" />
             <TextInput id="title" v-model="form.title" type="text" class="mt-2 block w-full" />
             <InputError :message="form.errors.title" class="mt-2" />
         </div>
 
         <div class="admin-card">
-            <InputLabel for="summary" value="Descripcion breve" />
-            <textarea id="summary" v-model="form.summary" rows="5" class="mt-2 block w-full rounded-2xl border-stone-300 px-4 py-3 text-sm shadow-sm focus:border-[var(--color-burgundy)] focus:ring-[var(--color-burgundy)]" />
+            <InputLabel for="summary" value="Approach / Enfoque" />
+            <textarea id="summary" v-model="form.summary" rows="8" class="mt-2 block w-full rounded-2xl border-stone-300 px-4 py-3 text-sm shadow-sm focus:border-[var(--color-burgundy)] focus:ring-[var(--color-burgundy)]" />
             <InputError :message="form.errors.summary" class="mt-2" />
         </div>
 
         <div class="grid gap-6 lg:grid-cols-2">
             <div class="admin-card">
-                <InputLabel for="target_client" value="Cliente objetivo" />
-                <textarea id="target_client" v-model="form.target_client" rows="4" class="mt-2 block w-full rounded-2xl border-stone-300 px-4 py-3 text-sm shadow-sm focus:border-[var(--color-burgundy)] focus:ring-[var(--color-burgundy)]" />
+                <InputLabel for="target_client" value="Target client / Cliente objetivo" />
+                <textarea id="target_client" v-model="form.target_client" rows="8" class="mt-2 block w-full rounded-2xl border-stone-300 px-4 py-3 text-sm shadow-sm focus:border-[var(--color-burgundy)] focus:ring-[var(--color-burgundy)]" />
                 <InputError :message="form.errors.target_client" class="mt-2" />
             </div>
 
             <div class="admin-card">
-                <InputLabel for="key_result" value="Resultado buscado" />
-                <textarea id="key_result" v-model="form.key_result" rows="4" class="mt-2 block w-full rounded-2xl border-stone-300 px-4 py-3 text-sm shadow-sm focus:border-[var(--color-burgundy)] focus:ring-[var(--color-burgundy)]" />
+                <InputLabel for="key_result" value="Portfolio of services / Catalogo de servicios" />
+                <textarea id="key_result" v-model="form.key_result" rows="12" class="mt-2 block w-full rounded-2xl border-stone-300 px-4 py-3 text-sm shadow-sm focus:border-[var(--color-burgundy)] focus:ring-[var(--color-burgundy)]" />
                 <InputError :message="form.errors.key_result" class="mt-2" />
             </div>
         </div>

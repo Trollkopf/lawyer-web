@@ -319,16 +319,16 @@ const submit = () => {
                         Titulares de seccion
                     </p>
                     <h2 class="mt-2 font-serif text-2xl text-stone-900">
-                        Servicios, abogados, casos y opiniones
+                        Roles, abogados, casos y opiniones
                     </h2>
 
                     <div class="mt-8 grid gap-6 lg:grid-cols-2">
                         <div class="rounded-3xl border border-stone-200 p-5">
-                            <h3 class="font-serif text-xl text-stone-900">Servicios</h3>
+                            <h3 class="font-serif text-xl text-stone-900">Roles</h3>
                             <div class="mt-4 space-y-4">
                                 <TextInput v-model="form.services.eyebrow" type="text" class="block w-full" placeholder="Etiqueta" />
                                 <textarea v-model="form.services.title" rows="2" class="block w-full rounded-2xl border-stone-300 px-4 py-3 text-sm shadow-sm" placeholder="Titulo" />
-                                <textarea v-model="form.services.description" rows="3" class="block w-full rounded-2xl border-stone-300 px-4 py-3 text-sm shadow-sm" placeholder="Descripcion" />
+                                <textarea v-model="form.services.description" rows="8" class="block w-full rounded-2xl border-stone-300 px-4 py-3 text-sm shadow-sm" placeholder="Texto introductorio de la seccion de roles" />
                             </div>
                         </div>
 

@@ -13,8 +13,10 @@ const props = defineProps({
 const form = useForm({
     title: props.successCase.title,
     challenge: props.successCase.challenge,
+    diagnosis: props.successCase.diagnosis ?? '',
     approach: props.successCase.approach,
     outcome: props.successCase.outcome,
+    takeaway: props.successCase.takeaway ?? '',
     practice_area: props.successCase.practice_area ?? '',
     sort_order: props.successCase.sort_order ?? 0,
     is_published: Boolean(props.successCase.is_published),

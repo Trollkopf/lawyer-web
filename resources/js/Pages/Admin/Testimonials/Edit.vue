@@ -35,7 +35,7 @@ const submit = () => {
                         Editar opinion
                     </h1>
                     <p class="mt-2 text-sm text-stone-500">
-                        Ajusta el texto antes de publicarlo.
+                        Ajusta el texto editorial antes de publicarlo.
                     </p>
                 </div>
                 <Link :href="route('dashboard.testimonials.index')" class="cta-secondary">

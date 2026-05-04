@@ -18,17 +18,17 @@ const submit = () => {
 </script>
 
 <template>
-    <Head title="Nuevo servicio" />
+    <Head title="Nuevo rol" />
 
     <AuthenticatedLayout>
         <template #header>
             <div class="flex items-center justify-between gap-4">
                 <div>
                     <h1 class="font-serif text-3xl text-stone-900">
-                        Nuevo servicio
+                        Nuevo rol
                     </h1>
                     <p class="mt-2 text-sm text-stone-500">
-                        Da de alta un bloque para la seccion de servicios.
+                        Da de alta un rol profesional para la seccion de roles.
                     </p>
                 </div>
                 <Link :href="route('dashboard.services.index')" class="cta-secondary">
@@ -39,7 +39,7 @@ const submit = () => {
 
         <div class="mx-auto max-w-5xl px-4 py-10 sm:px-6 lg:px-8">
             <form @submit.prevent="submit">
-                <Form :form="form" submit-label="Crear servicio" />
+                <Form :form="form" submit-label="Crear rol" />
             </form>
         </div>
     </AuthenticatedLayout>

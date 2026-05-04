@@ -16,8 +16,10 @@ class SuccessCaseRequest extends FormRequest
         return [
             'title' => ['required', 'string', 'max:255'],
             'challenge' => ['required', 'string'],
+            'diagnosis' => ['nullable', 'string'],
             'approach' => ['required', 'string'],
             'outcome' => ['required', 'string'],
+            'takeaway' => ['nullable', 'string'],
             'practice_area' => ['nullable', 'string', 'max:255'],
             'sort_order' => ['nullable', 'integer', 'min:0'],
             'is_published' => ['boolean'],

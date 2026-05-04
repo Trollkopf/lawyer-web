@@ -68,20 +68,28 @@ const destroyCase = (caseItem) => {
                                 {{ caseItem.title }}
                             </h2>
 
-                            <div class="mt-5 grid gap-4 lg:grid-cols-3">
+                            <div class="mt-5 grid gap-4 lg:grid-cols-2">
                                 <div>
                                     <p class="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-green-dark)]">
-                                        Problema inicial
+                                        Supuesto de hecho
                                     </p>
-                                    <p class="mt-2 text-sm leading-7 text-stone-600">
+                                    <p class="mt-2 whitespace-pre-line text-sm leading-7 text-stone-600">
                                         {{ caseItem.challenge }}
                                     </p>
                                 </div>
                                 <div>
                                     <p class="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-green-dark)]">
-                                        Intervencion
+                                        Primer diagnostico
                                     </p>
-                                    <p class="mt-2 text-sm leading-7 text-stone-600">
+                                    <p class="mt-2 whitespace-pre-line text-sm leading-7 text-stone-600">
+                                        {{ caseItem.diagnosis || 'Sin definir' }}
+                                    </p>
+                                </div>
+                                <div>
+                                    <p class="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-green-dark)]">
+                                        Metodologia aplicada
+                                    </p>
+                                    <p class="mt-2 whitespace-pre-line text-sm leading-7 text-stone-600">
                                         {{ caseItem.approach }}
                                     </p>
                                 </div>
@@ -89,8 +97,16 @@ const destroyCase = (caseItem) => {
                                     <p class="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-green-dark)]">
                                         Resultado
                                     </p>
-                                    <p class="mt-2 text-sm leading-7 text-stone-600">
+                                    <p class="mt-2 whitespace-pre-line text-sm leading-7 text-stone-600">
                                         {{ caseItem.outcome }}
+                                    </p>
+                                </div>
+                                <div class="lg:col-span-2">
+                                    <p class="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-green-dark)]">
+                                        Moraleja
+                                    </p>
+                                    <p class="mt-2 whitespace-pre-line text-sm leading-7 text-stone-600">
+                                        {{ caseItem.takeaway || 'Sin definir' }}
                                     </p>
                                 </div>
                             </div>

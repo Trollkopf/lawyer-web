@@ -25,17 +25,17 @@ const submit = () => {
 </script>
 
 <template>
-    <Head title="Editar servicio" />
+    <Head title="Editar rol" />
 
     <AuthenticatedLayout>
         <template #header>
             <div class="flex items-center justify-between gap-4">
                 <div>
                     <h1 class="font-serif text-3xl text-stone-900">
-                        Editar servicio
+                        Editar rol
                     </h1>
                     <p class="mt-2 text-sm text-stone-500">
-                        Ajusta contenido, orden o visibilidad del bloque.
+                        Ajusta contenido, orden o visibilidad del rol profesional.
                     </p>
                 </div>
                 <Link :href="route('dashboard.services.index')" class="cta-secondary">

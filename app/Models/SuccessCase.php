@@ -9,8 +9,10 @@ class SuccessCase extends Model
     protected $fillable = [
         'title',
         'challenge',
+        'diagnosis',
         'approach',
         'outcome',
+        'takeaway',
         'practice_area',
         'sort_order',
         'is_published',
