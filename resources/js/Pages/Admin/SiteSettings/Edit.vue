@@ -494,6 +494,9 @@ const submit = () => {
                         <div>
                             <InputLabel for="map_url" value="Mapa embebido (opcional)" />
                             <textarea id="map_url" v-model="form.contact.map_url" rows="3" class="mt-2 block w-full rounded-2xl border-stone-300 px-4 py-3 text-sm shadow-sm focus:border-[var(--color-burgundy)] focus:ring-[var(--color-burgundy)]" />
+                            <p class="mt-2 text-sm text-stone-500">
+                                Puedes pegar la URL de embebido o el iframe completo de Google Maps.
+                            </p>
                             <InputError :message="form.errors['contact.map_url']" class="mt-2" />
                         </div>
                         <div>

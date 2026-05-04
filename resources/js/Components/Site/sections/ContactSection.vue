@@ -1,10 +1,11 @@
 <script setup>
+import { computed } from 'vue';
 import ContactFormCard from '../forms/ContactFormCard.vue';
 import ContactInfoCard from '../cards/ContactInfoCard.vue';
 import SectionIntro from '../content/SectionIntro.vue';
 import { isSectionEnabled } from '../utils/site.js';
 
-defineProps({
+const props = defineProps({
     settings: {
         type: Object,
         required: true,
@@ -24,6 +25,22 @@ defineProps({
 });
 
 defineEmits(['submit']);
+
+const mapEmbedUrl = computed(() => {
+    const rawValue = props.settings.contact?.map_url?.trim();
+
+    if (!rawValue) {
+        return '';
+    }
+
+    const iframeMatch = rawValue.match(/<iframe[^>]+src=["']([^"']+)["']/i);
+
+    if (iframeMatch?.[1]) {
+        return iframeMatch[1];
+    }
+
+    return rawValue;
+});
 </script>
 
 <template>
@@ -50,15 +67,15 @@ defineEmits(['submit']);
                     :submit-label="submitLabel"
                     @submit="$emit('submit')"
                 />
-
-                <iframe
-                    v-if="settings.contact.map_url"
-                    :src="settings.contact.map_url"
-                    class="h-72 w-full rounded-xl border border-white/10"
-                    loading="lazy"
-                    referrerpolicy="no-referrer-when-downgrade"
-                />
             </div>
+
+            <iframe
+                v-if="mapEmbedUrl"
+                :src="mapEmbedUrl"
+                class="h-80 w-full rounded-xl border border-white/10 lg:col-span-2"
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+            />
         </div>
     </section>
 </template>
