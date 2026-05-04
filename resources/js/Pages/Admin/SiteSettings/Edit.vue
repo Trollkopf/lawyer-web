@@ -6,6 +6,28 @@ import TextInput from '@/Components/TextInput.vue';
 import AdminSectionSwitch from '@/Components/Site/content/AdminSectionSwitch.vue';
 import { Head, useForm } from '@inertiajs/vue3';
 
+const defaultTheme = {
+    bg: '#ffffff',
+    bg_soft: '#f6faf7',
+    green_light: '#dceee3',
+    green: '#8eb99f',
+    green_dark: '#456b55',
+    burgundy: '#6d1f2f',
+    burgundy_dark: '#48131f',
+    text: '#1f2421',
+    text_muted: '#68726b',
+    border: '#e4e8e5',
+    gold_soft: '#c8a96a',
+};
+
+const normalizeBoolean = (value, fallback = true) => {
+    if (value === undefined || value === null) {
+        return fallback;
+    }
+
+    return ![false, 0, '0', 'false'].includes(value);
+};
+
 const props = defineProps({
     settings: {
         type: Object,
@@ -62,8 +84,8 @@ const form = useForm({
         highlight_text: props.settings.hero?.highlight_text ?? '',
     },
     presentation: {
-        is_enabled: props.settings.presentation?.is_enabled ?? true,
-        enable_read_more: props.settings.presentation?.enable_read_more ?? true,
+        is_enabled: normalizeBoolean(props.settings.presentation?.is_enabled),
+        enable_read_more: normalizeBoolean(props.settings.presentation?.enable_read_more),
         eyebrow: props.settings.presentation?.eyebrow ?? '',
         title: props.settings.presentation?.title ?? '',
         body: props.settings.presentation?.body ?? '',
@@ -71,34 +93,34 @@ const form = useForm({
         signature: props.settings.presentation?.signature ?? '',
     },
     services: {
-        is_enabled: props.settings.services?.is_enabled ?? true,
-        enable_read_more: props.settings.services?.enable_read_more ?? true,
+        is_enabled: normalizeBoolean(props.settings.services?.is_enabled),
+        enable_read_more: normalizeBoolean(props.settings.services?.enable_read_more),
         eyebrow: props.settings.services?.eyebrow ?? '',
         title: props.settings.services?.title ?? '',
         description: props.settings.services?.description ?? '',
     },
     team: {
-        is_enabled: props.settings.team?.is_enabled ?? true,
+        is_enabled: normalizeBoolean(props.settings.team?.is_enabled),
         eyebrow: props.settings.team?.eyebrow ?? '',
         title: props.settings.team?.title ?? '',
         description: props.settings.team?.description ?? '',
     },
     cases: {
-        is_enabled: props.settings.cases?.is_enabled ?? true,
-        enable_read_more: props.settings.cases?.enable_read_more ?? true,
+        is_enabled: normalizeBoolean(props.settings.cases?.is_enabled),
+        enable_read_more: normalizeBoolean(props.settings.cases?.enable_read_more),
         eyebrow: props.settings.cases?.eyebrow ?? '',
         title: props.settings.cases?.title ?? '',
         description: props.settings.cases?.description ?? '',
     },
     testimonials: {
-        is_enabled: props.settings.testimonials?.is_enabled ?? true,
-        enable_read_more: props.settings.testimonials?.enable_read_more ?? true,
+        is_enabled: normalizeBoolean(props.settings.testimonials?.is_enabled),
+        enable_read_more: normalizeBoolean(props.settings.testimonials?.enable_read_more),
         eyebrow: props.settings.testimonials?.eyebrow ?? '',
         title: props.settings.testimonials?.title ?? '',
         description: props.settings.testimonials?.description ?? '',
     },
     contact: {
-        is_enabled: props.settings.contact?.is_enabled ?? true,
+        is_enabled: normalizeBoolean(props.settings.contact?.is_enabled),
         eyebrow: props.settings.contact?.eyebrow ?? '',
         title: props.settings.contact?.title ?? '',
         description: props.settings.contact?.description ?? '',
@@ -280,6 +302,9 @@ const submit = () => {
                                 >
                                 <TextInput v-model="form.theme[field.key]" type="text" class="block w-full uppercase" />
                             </div>
+                            <p class="mt-2 text-xs text-stone-500">
+                                Por defecto: {{ defaultTheme[field.key] }}
+                            </p>
                             <InputError :message="form.errors[`theme.${field.key}`]" class="mt-2" />
                         </div>
                     </div>

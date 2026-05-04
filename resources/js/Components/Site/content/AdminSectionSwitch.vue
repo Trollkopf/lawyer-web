@@ -1,7 +1,9 @@
 <script setup>
-defineProps({
+import { computed } from 'vue';
+
+const props = defineProps({
     modelValue: {
-        type: Boolean,
+        type: [Boolean, Number, String],
         default: true,
     },
     label: {
@@ -15,6 +17,7 @@ defineProps({
 });
 
 const emit = defineEmits(['update:modelValue']);
+const isOn = computed(() => ![false, 0, '0', 'false', null, undefined].includes(props.modelValue));
 </script>
 
 <template>
@@ -30,13 +33,13 @@ const emit = defineEmits(['update:modelValue']);
         <button
             type="button"
             class="admin-switch-track"
-            :class="modelValue ? 'admin-switch-track-on' : 'admin-switch-track-off'"
-            :aria-pressed="modelValue ? 'true' : 'false'"
-            @click="emit('update:modelValue', !modelValue)"
+            :class="isOn ? 'admin-switch-track-on' : 'admin-switch-track-off'"
+            :aria-pressed="isOn ? 'true' : 'false'"
+            @click="emit('update:modelValue', !isOn)"
         >
             <span
                 class="admin-switch-thumb"
-                :class="modelValue ? 'translate-x-5' : 'translate-x-0'"
+                :class="isOn ? 'translate-x-5' : 'translate-x-0'"
             />
         </button>
     </label>
