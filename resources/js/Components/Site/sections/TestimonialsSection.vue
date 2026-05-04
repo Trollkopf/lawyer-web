@@ -37,14 +37,14 @@ const activeOpinion = computed(() => props.testimonials.find((item) => item.id =
 
 <template>
     <section v-if="settings.testimonials?.is_enabled !== false" id="opiniones" class="section-shell">
-        <div class="site-container">
+        <div class="site-container site-container-wide">
             <SectionIntro
                 :eyebrow="settings.testimonials.eyebrow"
                 :title="settings.testimonials.title"
                 :description="settings.testimonials.description"
             />
 
-            <div class="mt-12 grid gap-6 lg:grid-cols-[19rem_minmax(0,1fr)] lg:items-start">
+            <div class="mt-12 grid gap-6 lg:grid-cols-[17rem_minmax(0,1fr)] lg:items-start">
                 <SectionTabList
                     v-if="testimonials.length"
                     :items="testimonials"

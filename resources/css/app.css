@@ -46,6 +46,10 @@
         @apply mx-auto w-full max-w-6xl px-6 lg:px-8;
     }
 
+    .site-container-wide {
+        @apply max-w-7xl;
+    }
+
     .section-shell {
         @apply py-20 md:py-28;
     }
@@ -119,7 +123,7 @@
     }
 
     .section-tab-button {
-        @apply min-w-[14rem] rounded-2xl border px-5 py-4 transition focus:outline-none focus:ring-2 focus:ring-[var(--color-burgundy)] focus:ring-offset-2 lg:min-w-0;
+        @apply min-w-[15rem] rounded-2xl border px-5 py-4 transition focus:outline-none focus:ring-2 focus:ring-[var(--color-burgundy)] focus:ring-offset-2 lg:min-w-0;
     }
 
     .section-tab-button-idle {

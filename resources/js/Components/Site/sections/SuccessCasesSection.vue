@@ -37,14 +37,14 @@ const activeCase = computed(() => props.successCases.find((item) => item.id === 
 
 <template>
     <section v-if="settings.cases?.is_enabled !== false" id="casos" class="section-shell bg-[var(--color-bg-soft)]">
-        <div class="site-container">
+        <div class="site-container site-container-wide">
             <SectionIntro
                 :eyebrow="settings.cases.eyebrow"
                 :title="settings.cases.title"
                 :description="settings.cases.description"
             />
 
-            <div class="mt-12 grid gap-6 lg:grid-cols-[19rem_minmax(0,1fr)] lg:items-start">
+            <div class="mt-12 grid gap-6 lg:grid-cols-[17rem_minmax(0,1fr)] lg:items-start">
                 <SectionTabList
                     v-if="successCases.length"
                     :items="successCases"

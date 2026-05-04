@@ -31,10 +31,10 @@ const emit = defineEmits(['select']);
             :class="item.id === activeId ? 'section-tab-button-active' : 'section-tab-button-idle'"
             @click="emit('select', item.id)"
         >
-            <span class="block text-left font-serif text-lg leading-tight">
+            <span class="block text-left font-sans text-[1.02rem] font-semibold leading-snug tracking-[-0.01em] text-[var(--color-text)]">
                 {{ item[labelKey] }}
             </span>
-            <span v-if="secondaryKey && item[secondaryKey]" class="mt-2 block text-left text-xs font-semibold uppercase tracking-[0.22em] text-[var(--color-text-muted)]">
+            <span v-if="secondaryKey && item[secondaryKey]" class="mt-2 block text-left text-sm leading-6 text-[var(--color-text-muted)]">
                 {{ item[secondaryKey] }}
             </span>
         </button>

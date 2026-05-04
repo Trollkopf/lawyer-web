@@ -37,14 +37,14 @@ const activeService = computed(() => props.services.find((item) => item.id === a
 
 <template>
     <section v-if="settings.services?.is_enabled !== false" id="servicios" class="section-shell bg-[var(--color-bg-soft)]">
-        <div class="site-container">
+        <div class="site-container site-container-wide">
             <SectionIntro
                 :eyebrow="settings.services.eyebrow"
                 :title="settings.services.title"
                 :description="settings.services.description"
             />
 
-            <div class="mt-12 grid gap-6 lg:grid-cols-[19rem_minmax(0,1fr)] lg:items-start">
+            <div class="mt-12 grid gap-6 lg:grid-cols-[17rem_minmax(0,1fr)] lg:items-start">
                 <SectionTabList
                     v-if="services.length"
                     :items="services"

@@ -95,6 +95,30 @@ const form = useForm({
 const submit = () => {
     form.transform((data) => ({
         ...data,
+        presentation: {
+            ...data.presentation,
+            is_enabled: data.presentation.is_enabled ? 1 : 0,
+        },
+        services: {
+            ...data.services,
+            is_enabled: data.services.is_enabled ? 1 : 0,
+        },
+        team: {
+            ...data.team,
+            is_enabled: data.team.is_enabled ? 1 : 0,
+        },
+        cases: {
+            ...data.cases,
+            is_enabled: data.cases.is_enabled ? 1 : 0,
+        },
+        testimonials: {
+            ...data.testimonials,
+            is_enabled: data.testimonials.is_enabled ? 1 : 0,
+        },
+        contact: {
+            ...data.contact,
+            is_enabled: data.contact.is_enabled ? 1 : 0,
+        },
         _method: 'put',
     })).post(route('dashboard.settings.update'), {
         forceFormData: true,
