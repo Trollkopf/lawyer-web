@@ -38,6 +38,7 @@ const props = defineProps({
 
 const menuOpen = ref(false);
 const isScrolled = ref(false);
+const isMobileViewport = ref(false);
 
 const contactForm = useForm({
     name: '',
@@ -86,6 +87,14 @@ const syncScrolledState = () => {
     isScrolled.value = window.scrollY > 24;
 };
 
+const syncViewportState = () => {
+    if (typeof window === 'undefined') {
+        return;
+    }
+
+    isMobileViewport.value = window.innerWidth < 768;
+};
+
 const heroBackgroundStyle = computed(() => {
     if (!props.settings.hero_image_url) {
         return {
@@ -130,13 +139,24 @@ const submitContactForm = () => {
     });
 };
 
+const scrollToTop = () => {
+    if (typeof window === 'undefined') {
+        return;
+    }
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+};
+
 onMounted(() => {
     syncScrolledState();
+    syncViewportState();
     window.addEventListener('scroll', syncScrolledState, { passive: true });
+    window.addEventListener('resize', syncViewportState, { passive: true });
 });
 
 onBeforeUnmount(() => {
     window.removeEventListener('scroll', syncScrolledState);
+    window.removeEventListener('resize', syncViewportState);
 });
 </script>
 
@@ -169,10 +189,10 @@ onBeforeUnmount(() => {
         <main>
             <HeroSection :settings="settings" :hero-background-style="heroBackgroundStyle" />
             <PresentationSection :settings="settings" :paragraphs="presentationParagraphs" />
-            <ServicesSection :settings="settings" :services="services" />
+            <ServicesSection :settings="settings" :services="services" :force-read-more="isMobileViewport" />
             <TeamSection :settings="settings" :lawyers="lawyers" />
-            <SuccessCasesSection :settings="settings" :success-cases="successCases" />
-            <TestimonialsSection :settings="settings" :testimonials="testimonials" />
+            <SuccessCasesSection :settings="settings" :success-cases="successCases" :force-read-more="isMobileViewport" />
+            <TestimonialsSection :settings="settings" :testimonials="testimonials" :force-read-more="isMobileViewport" />
             <ContactSection
                 :settings="settings"
                 :contact-form="contactForm"
@@ -181,6 +201,25 @@ onBeforeUnmount(() => {
                 @submit="submitContactForm"
             />
         </main>
+
+        <button
+            v-if="isMobileViewport && isScrolled"
+            type="button"
+            class="back-to-top-mobile"
+            aria-label="Volver arriba"
+            @click="scrollToTop"
+        >
+            <svg class="h-4 w-4" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path
+                    d="M8 12V4M8 4 4.5 7.5M8 4l3.5 3.5"
+                    stroke="currentColor"
+                    stroke-width="1.7"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                />
+            </svg>
+            <span>Volver arriba</span>
+        </button>
 
         <SiteFooter :settings="settings" />
     </div>

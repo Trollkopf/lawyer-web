@@ -44,6 +44,7 @@ class UpdateSiteSettingsRequest extends FormRequest
             'presentation.signature' => ['nullable', 'string', 'max:255'],
 
             'services.is_enabled' => ['boolean'],
+            'services.enable_read_more' => ['boolean'],
             'services.eyebrow' => ['nullable', 'string', 'max:255'],
             'services.title' => ['required', 'string', 'max:255'],
             'services.description' => ['required', 'string'],
@@ -54,11 +55,13 @@ class UpdateSiteSettingsRequest extends FormRequest
             'team.description' => ['required', 'string'],
 
             'cases.is_enabled' => ['boolean'],
+            'cases.enable_read_more' => ['boolean'],
             'cases.eyebrow' => ['nullable', 'string', 'max:255'],
             'cases.title' => ['required', 'string', 'max:255'],
             'cases.description' => ['required', 'string'],
 
             'testimonials.is_enabled' => ['boolean'],
+            'testimonials.enable_read_more' => ['boolean'],
             'testimonials.eyebrow' => ['nullable', 'string', 'max:255'],
             'testimonials.title' => ['required', 'string', 'max:255'],
             'testimonials.description' => ['required', 'string'],

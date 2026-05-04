@@ -14,6 +14,10 @@ const props = defineProps({
         type: Array,
         required: true,
     },
+    forceReadMore: {
+        type: Boolean,
+        default: false,
+    },
 });
 
 const activeServiceId = ref(props.services[0]?.id ?? null);
@@ -34,6 +38,12 @@ watch(
 );
 
 const activeService = computed(() => props.services.find((item) => item.id === activeServiceId.value) ?? null);
+const allowExpand = computed(() => (
+    props.forceReadMore
+    || props.settings.services?.enable_read_more === true
+    || props.settings.services?.enable_read_more === 1
+    || props.settings.services?.enable_read_more === '1'
+));
 </script>
 
 <template>
@@ -56,6 +66,7 @@ const activeService = computed(() => props.services.find((item) => item.id === a
                 <ServiceCard
                     v-if="activeService"
                     :service="activeService"
+                    :allow-expand="allowExpand"
                 />
 
                 <article v-if="!services.length" class="surface-panel p-8 lg:col-span-2">

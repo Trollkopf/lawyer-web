@@ -14,6 +14,10 @@ const props = defineProps({
         type: Array,
         required: true,
     },
+    forceReadMore: {
+        type: Boolean,
+        default: false,
+    },
 });
 
 const activeCaseId = ref(props.successCases[0]?.id ?? null);
@@ -34,6 +38,12 @@ watch(
 );
 
 const activeCase = computed(() => props.successCases.find((item) => item.id === activeCaseId.value) ?? null);
+const allowExpand = computed(() => (
+    props.forceReadMore
+    || props.settings.cases?.enable_read_more === true
+    || props.settings.cases?.enable_read_more === 1
+    || props.settings.cases?.enable_read_more === '1'
+));
 </script>
 
 <template>
@@ -57,6 +67,7 @@ const activeCase = computed(() => props.successCases.find((item) => item.id === 
                 <SuccessCaseCard
                     v-if="activeCase"
                     :case-item="activeCase"
+                    :allow-expand="allowExpand"
                 />
 
                 <article v-if="!successCases.length" class="surface-panel p-8 lg:col-span-2">

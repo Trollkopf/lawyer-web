@@ -1,10 +1,19 @@
 <script setup>
-defineProps({
+import { ref } from 'vue';
+import ExpandToggleButton from '../content/ExpandToggleButton.vue';
+
+const props = defineProps({
     caseItem: {
         type: Object,
         required: true,
     },
+    allowExpand: {
+        type: Boolean,
+        default: false,
+    },
 });
+
+const expanded = ref(false);
 </script>
 
 <template>
@@ -15,7 +24,10 @@ defineProps({
         <h3 class="mt-5 font-serif text-2xl text-[var(--color-text)]">
             {{ caseItem.title }}
         </h3>
-        <div class="mt-6 space-y-5 text-sm leading-7 text-[var(--color-text-muted)]">
+        <div
+            class="mt-6 space-y-5 text-sm leading-7 text-[var(--color-text-muted)]"
+            :class="allowExpand && !expanded ? 'content-fade-panel content-fade-panel-md' : ''"
+        >
             <div>
                 <p class="font-semibold text-[var(--color-green-dark)]">
                     Supuesto de hecho
@@ -56,6 +68,9 @@ defineProps({
                     {{ caseItem.takeaway }}
                 </p>
             </div>
+        </div>
+        <div v-if="allowExpand" class="mt-6">
+            <ExpandToggleButton :expanded="expanded" @toggle="expanded = !expanded" />
         </div>
     </article>
 </template>

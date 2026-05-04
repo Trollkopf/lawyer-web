@@ -74,6 +74,7 @@ class SiteSetting extends Model
             ],
             'services' => [
                 'is_enabled' => true,
+                'enable_read_more' => true,
                 'eyebrow' => 'Servicios',
                 'title' => 'Asesoramiento legal adaptado a cada situacion.',
                 'description' => 'Desde la prevencion de conflictos hasta la defensa judicial, cada servicio puede editarse individualmente desde el backoffice.',
@@ -86,12 +87,14 @@ class SiteSetting extends Model
             ],
             'cases' => [
                 'is_enabled' => true,
+                'enable_read_more' => true,
                 'eyebrow' => 'Casos de exito',
                 'title' => 'Experiencia aplicada con prudencia y confidencialidad.',
                 'description' => 'Esta seccion esta pensada para publicar casos reales anonimizados y autorizados, sin comprometer informacion sensible.',
             ],
             'testimonials' => [
                 'is_enabled' => true,
+                'enable_read_more' => true,
                 'eyebrow' => 'Opiniones',
                 'title' => 'Valoraciones reales, presentadas con sobriedad.',
                 'description' => 'Cuando el cliente facilite resenas verificadas, podran publicarse aqui y ordenarse desde el panel.',

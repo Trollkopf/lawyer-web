@@ -54,6 +54,7 @@ const form = useForm({
     },
     services: {
         is_enabled: props.settings.services?.is_enabled ?? true,
+        enable_read_more: props.settings.services?.enable_read_more ?? true,
         eyebrow: props.settings.services?.eyebrow ?? '',
         title: props.settings.services?.title ?? '',
         description: props.settings.services?.description ?? '',
@@ -66,12 +67,14 @@ const form = useForm({
     },
     cases: {
         is_enabled: props.settings.cases?.is_enabled ?? true,
+        enable_read_more: props.settings.cases?.enable_read_more ?? true,
         eyebrow: props.settings.cases?.eyebrow ?? '',
         title: props.settings.cases?.title ?? '',
         description: props.settings.cases?.description ?? '',
     },
     testimonials: {
         is_enabled: props.settings.testimonials?.is_enabled ?? true,
+        enable_read_more: props.settings.testimonials?.enable_read_more ?? true,
         eyebrow: props.settings.testimonials?.eyebrow ?? '',
         title: props.settings.testimonials?.title ?? '',
         description: props.settings.testimonials?.description ?? '',
@@ -102,6 +105,7 @@ const submit = () => {
         services: {
             ...data.services,
             is_enabled: data.services.is_enabled ? 1 : 0,
+            enable_read_more: data.services.enable_read_more ? 1 : 0,
         },
         team: {
             ...data.team,
@@ -110,10 +114,12 @@ const submit = () => {
         cases: {
             ...data.cases,
             is_enabled: data.cases.is_enabled ? 1 : 0,
+            enable_read_more: data.cases.enable_read_more ? 1 : 0,
         },
         testimonials: {
             ...data.testimonials,
             is_enabled: data.testimonials.is_enabled ? 1 : 0,
+            enable_read_more: data.testimonials.enable_read_more ? 1 : 0,
         },
         contact: {
             ...data.contact,
@@ -366,6 +372,10 @@ const submit = () => {
                                     v-model="form.services.is_enabled"
                                     label="Mostrar roles en la home"
                                 />
+                                <AdminSectionSwitch
+                                    v-model="form.services.enable_read_more"
+                                    label='Activar "ver mas" en roles'
+                                />
                                 <TextInput v-model="form.services.eyebrow" type="text" class="block w-full" placeholder="Etiqueta" />
                                 <textarea v-model="form.services.title" rows="2" class="block w-full rounded-2xl border-stone-300 px-4 py-3 text-sm shadow-sm" placeholder="Titulo" />
                                 <textarea v-model="form.services.description" rows="8" class="block w-full rounded-2xl border-stone-300 px-4 py-3 text-sm shadow-sm" placeholder="Texto introductorio de la seccion de roles" />
@@ -392,6 +402,10 @@ const submit = () => {
                                     v-model="form.cases.is_enabled"
                                     label="Mostrar casos en la home"
                                 />
+                                <AdminSectionSwitch
+                                    v-model="form.cases.enable_read_more"
+                                    label='Activar "ver mas" en casos'
+                                />
                                 <TextInput v-model="form.cases.eyebrow" type="text" class="block w-full" placeholder="Etiqueta" />
                                 <textarea v-model="form.cases.title" rows="2" class="block w-full rounded-2xl border-stone-300 px-4 py-3 text-sm shadow-sm" placeholder="Titulo" />
                                 <textarea v-model="form.cases.description" rows="3" class="block w-full rounded-2xl border-stone-300 px-4 py-3 text-sm shadow-sm" placeholder="Descripcion" />
@@ -404,6 +418,10 @@ const submit = () => {
                                 <AdminSectionSwitch
                                     v-model="form.testimonials.is_enabled"
                                     label="Mostrar opiniones en la home"
+                                />
+                                <AdminSectionSwitch
+                                    v-model="form.testimonials.enable_read_more"
+                                    label='Activar "ver mas" en opiniones'
                                 />
                                 <TextInput v-model="form.testimonials.eyebrow" type="text" class="block w-full" placeholder="Etiqueta" />
                                 <textarea v-model="form.testimonials.title" rows="2" class="block w-full rounded-2xl border-stone-300 px-4 py-3 text-sm shadow-sm" placeholder="Titulo" />

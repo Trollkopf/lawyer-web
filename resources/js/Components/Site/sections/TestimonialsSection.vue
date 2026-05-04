@@ -14,6 +14,10 @@ const props = defineProps({
         type: Array,
         required: true,
     },
+    forceReadMore: {
+        type: Boolean,
+        default: false,
+    },
 });
 
 const activeOpinionId = ref(props.testimonials[0]?.id ?? null);
@@ -34,6 +38,12 @@ watch(
 );
 
 const activeOpinion = computed(() => props.testimonials.find((item) => item.id === activeOpinionId.value) ?? null);
+const allowExpand = computed(() => (
+    props.forceReadMore
+    || props.settings.testimonials?.enable_read_more === true
+    || props.settings.testimonials?.enable_read_more === 1
+    || props.settings.testimonials?.enable_read_more === '1'
+));
 </script>
 
 <template>
@@ -58,6 +68,7 @@ const activeOpinion = computed(() => props.testimonials.find((item) => item.id =
                 <TestimonialCard
                     v-if="activeOpinion"
                     :testimonial="activeOpinion"
+                    :allow-expand="allowExpand"
                 />
 
                 <article v-if="!testimonials.length" class="surface-panel p-8 lg:col-span-2">
