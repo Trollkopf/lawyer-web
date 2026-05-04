@@ -25,6 +25,9 @@ class SiteSettingsController extends Controller
             'logoUrl' => $setting?->logo_path
                 ? Storage::url($setting->logo_path)
                 : null,
+            'faviconUrl' => $setting?->logo_path
+                ? Storage::url($setting->logo_path)
+                : null,
             'heroImageUrl' => $setting?->hero_image_path
                 ? Storage::url($setting->hero_image_path)
                 : null,

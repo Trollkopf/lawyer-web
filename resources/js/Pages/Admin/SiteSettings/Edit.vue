@@ -15,6 +15,10 @@ const props = defineProps({
         type: String,
         default: null,
     },
+    faviconUrl: {
+        type: String,
+        default: null,
+    },
     heroImageUrl: {
         type: String,
         default: null,
@@ -33,6 +37,19 @@ const form = useForm({
     meta_description: props.settings.meta_description ?? '',
     logo: null,
     hero_image: null,
+    theme: {
+        bg: props.settings.theme?.bg ?? '#ffffff',
+        bg_soft: props.settings.theme?.bg_soft ?? '#f6faf7',
+        green_light: props.settings.theme?.green_light ?? '#dceee3',
+        green: props.settings.theme?.green ?? '#8eb99f',
+        green_dark: props.settings.theme?.green_dark ?? '#456b55',
+        burgundy: props.settings.theme?.burgundy ?? '#6d1f2f',
+        burgundy_dark: props.settings.theme?.burgundy_dark ?? '#48131f',
+        text: props.settings.theme?.text ?? '#1f2421',
+        text_muted: props.settings.theme?.text_muted ?? '#68726b',
+        border: props.settings.theme?.border ?? '#e4e8e5',
+        gold_soft: props.settings.theme?.gold_soft ?? '#c8a96a',
+    },
     hero: {
         eyebrow: props.settings.hero?.eyebrow ?? '',
         title: props.settings.hero?.title ?? '',
@@ -208,7 +225,7 @@ const submit = () => {
                             <InputLabel for="logo" value="Logotipo" />
                             <input id="logo" type="file" accept="image/*" class="mt-2 block w-full rounded-2xl border border-stone-300 px-4 py-3 text-sm" @input="form.logo = $event.target.files[0]" />
                             <p class="mt-2 text-sm text-stone-500">
-                                Si no cargas logo, la web mostrara las iniciales como fallback.
+                                Si no cargas logo, la web mostrara las iniciales como fallback. El logotipo subido se reutiliza tambien como favicon.
                             </p>
                             <InputError :message="form.errors.logo" class="mt-2" />
                         </div>
@@ -219,6 +236,51 @@ const submit = () => {
                             <div class="mt-4 flex h-28 items-center justify-center rounded-2xl bg-stone-50 p-4">
                                 <img :src="logoUrl" :alt="`Logo de ${form.site_name}`" class="max-h-full max-w-full object-contain">
                             </div>
+                            <p v-if="faviconUrl" class="mt-3 text-sm text-stone-500">
+                                El navegador usara este mismo archivo como favicon.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="admin-card">
+                    <p class="text-sm uppercase tracking-[0.24em] text-[var(--color-burgundy)]">
+                        Identidad visual
+                    </p>
+                    <h2 class="mt-2 font-serif text-2xl text-stone-900">
+                        Colores de la web
+                    </h2>
+                    <p class="mt-2 max-w-3xl text-sm text-stone-500">
+                        Puedes ajustar la paleta principal de la web desde aqui. Se aplicara a la parte publica, no al backoffice.
+                    </p>
+
+                    <div class="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+                        <div class="rounded-3xl border border-stone-200 p-4" v-for="field in [
+                            { key: 'bg', label: 'Fondo base' },
+                            { key: 'bg_soft', label: 'Fondo suave' },
+                            { key: 'green_light', label: 'Verde claro' },
+                            { key: 'green', label: 'Verde principal' },
+                            { key: 'green_dark', label: 'Verde oscuro' },
+                            { key: 'burgundy', label: 'Granate principal' },
+                            { key: 'burgundy_dark', label: 'Granate oscuro' },
+                            { key: 'text', label: 'Texto principal' },
+                            { key: 'text_muted', label: 'Texto secundario' },
+                            { key: 'border', label: 'Bordes' },
+                            { key: 'gold_soft', label: 'Dorado suave' },
+                        ]" :key="field.key">
+                            <label :for="`theme_${field.key}`" class="block text-sm font-semibold text-stone-900">
+                                {{ field.label }}
+                            </label>
+                            <div class="mt-3 flex items-center gap-3">
+                                <input
+                                    :id="`theme_${field.key}`"
+                                    v-model="form.theme[field.key]"
+                                    type="color"
+                                    class="h-12 w-16 cursor-pointer rounded-xl border border-stone-300 bg-white p-1"
+                                >
+                                <TextInput v-model="form.theme[field.key]" type="text" class="block w-full uppercase" />
+                            </div>
+                            <InputError :message="form.errors[`theme.${field.key}`]" class="mt-2" />
                         </div>
                     </div>
                 </section>

@@ -18,6 +18,7 @@ class SiteSetting extends Model
         'meta_description',
         'logo_path',
         'hero_image_path',
+        'theme',
         'hero',
         'presentation',
         'services',
@@ -30,6 +31,7 @@ class SiteSetting extends Model
 
     protected $casts = [
         'hero' => 'array',
+        'theme' => 'array',
         'presentation' => 'array',
         'services' => 'array',
         'team' => 'array',
@@ -53,6 +55,19 @@ class SiteSetting extends Model
             'meta_description' => 'Despacho juridico en Ciudad. Asesoramiento y defensa legal con un enfoque claro, riguroso y personalizado.',
             'logo_path' => null,
             'hero_image_path' => null,
+            'theme' => [
+                'bg' => '#ffffff',
+                'bg_soft' => '#f6faf7',
+                'green_light' => '#dceee3',
+                'green' => '#8eb99f',
+                'green_dark' => '#456b55',
+                'burgundy' => '#6d1f2f',
+                'burgundy_dark' => '#48131f',
+                'text' => '#1f2421',
+                'text_muted' => '#68726b',
+                'border' => '#e4e8e5',
+                'gold_soft' => '#c8a96a',
+            ],
             'hero' => [
                 'eyebrow' => 'Despacho legal',
                 'title' => 'Defensa juridica serena, rigurosa y estrategica.',

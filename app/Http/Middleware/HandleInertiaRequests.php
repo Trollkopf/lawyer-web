@@ -44,6 +44,9 @@ class HandleInertiaRequests extends Middleware
                 'logoUrl' => $settings?->logo_path
                     ? Storage::url($settings->logo_path)
                     : null,
+                'faviconUrl' => $settings?->logo_path
+                    ? Storage::url($settings->logo_path)
+                    : null,
             ],
             'flash' => [
                 'success' => fn () => $request->session()->get('success'),

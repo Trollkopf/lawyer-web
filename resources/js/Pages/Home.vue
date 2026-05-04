@@ -111,6 +111,19 @@ const heroBackgroundStyle = computed(() => {
 });
 
 const presentationParagraphs = computed(() => splitParagraphs(props.settings.presentation?.body));
+const themeStyle = computed(() => ({
+    '--color-bg': props.settings.theme?.bg ?? '#ffffff',
+    '--color-bg-soft': props.settings.theme?.bg_soft ?? '#f6faf7',
+    '--color-green-light': props.settings.theme?.green_light ?? '#dceee3',
+    '--color-green': props.settings.theme?.green ?? '#8eb99f',
+    '--color-green-dark': props.settings.theme?.green_dark ?? '#456b55',
+    '--color-burgundy': props.settings.theme?.burgundy ?? '#6d1f2f',
+    '--color-burgundy-dark': props.settings.theme?.burgundy_dark ?? '#48131f',
+    '--color-text': props.settings.theme?.text ?? '#1f2421',
+    '--color-text-muted': props.settings.theme?.text_muted ?? '#68726b',
+    '--color-border': props.settings.theme?.border ?? '#e4e8e5',
+    '--color-gold-soft': props.settings.theme?.gold_soft ?? '#c8a96a',
+}));
 
 const structuredData = computed(() => JSON.stringify({
     '@context': 'https://schema.org',
@@ -163,6 +176,7 @@ onBeforeUnmount(() => {
 <template>
     <Head :title="settings.meta_title || settings.site_name">
         <meta head-key="description" name="description" :content="settings.meta_description" />
+        <link v-if="settings.favicon_url" head-key="favicon" rel="icon" :href="settings.favicon_url" />
         <component
             :is="'script'"
             head-key="structured-data"
@@ -171,7 +185,7 @@ onBeforeUnmount(() => {
         />
     </Head>
 
-    <div class="page-shell">
+    <div class="page-shell" :style="themeStyle">
         <div class="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[36rem] bg-[radial-gradient(circle_at_top_left,_rgba(220,238,227,0.62),_transparent_58%)]" />
         <div class="pointer-events-none absolute right-0 top-48 -z-10 h-[26rem] w-[26rem] rounded-full bg-[radial-gradient(circle,_rgba(109,31,47,0.06),_transparent_68%)] blur-3xl" />
 

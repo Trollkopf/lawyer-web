@@ -26,6 +26,18 @@ class UpdateSiteSettingsRequest extends FormRequest
             'logo' => ['nullable', 'image', 'max:4096'],
             'hero_image' => ['nullable', 'image', 'max:4096'],
 
+            'theme.bg' => ['required', 'regex:/^#[0-9A-Fa-f]{6}$/'],
+            'theme.bg_soft' => ['required', 'regex:/^#[0-9A-Fa-f]{6}$/'],
+            'theme.green_light' => ['required', 'regex:/^#[0-9A-Fa-f]{6}$/'],
+            'theme.green' => ['required', 'regex:/^#[0-9A-Fa-f]{6}$/'],
+            'theme.green_dark' => ['required', 'regex:/^#[0-9A-Fa-f]{6}$/'],
+            'theme.burgundy' => ['required', 'regex:/^#[0-9A-Fa-f]{6}$/'],
+            'theme.burgundy_dark' => ['required', 'regex:/^#[0-9A-Fa-f]{6}$/'],
+            'theme.text' => ['required', 'regex:/^#[0-9A-Fa-f]{6}$/'],
+            'theme.text_muted' => ['required', 'regex:/^#[0-9A-Fa-f]{6}$/'],
+            'theme.border' => ['required', 'regex:/^#[0-9A-Fa-f]{6}$/'],
+            'theme.gold_soft' => ['required', 'regex:/^#[0-9A-Fa-f]{6}$/'],
+
             'hero.eyebrow' => ['nullable', 'string', 'max:255'],
             'hero.title' => ['required', 'string', 'max:255'],
             'hero.description' => ['required', 'string'],

@@ -1,9 +1,15 @@
 <script setup>
 import ApplicationLogo from '@/Components/ApplicationLogo.vue';
-import { Link } from '@inertiajs/vue3';
+import { Head, Link, usePage } from '@inertiajs/vue3';
+
+const page = usePage();
 </script>
 
 <template>
+    <Head>
+        <link v-if="page.props.branding?.faviconUrl" head-key="favicon" rel="icon" :href="page.props.branding.faviconUrl" />
+    </Head>
+
     <div
         class="flex min-h-screen flex-col items-center bg-[var(--color-bg-soft)] pt-6 sm:justify-center sm:pt-0"
     >

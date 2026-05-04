@@ -1,5 +1,6 @@
 <script setup>
 import { computed, ref } from 'vue';
+import { Head } from '@inertiajs/vue3';
 import Dropdown from '@/Components/Dropdown.vue';
 import DropdownLink from '@/Components/DropdownLink.vue';
 import { Link, usePage } from '@inertiajs/vue3';
@@ -53,6 +54,10 @@ const navigation = [
 </script>
 
 <template>
+    <Head>
+        <link v-if="$page.props.branding?.faviconUrl" head-key="favicon" rel="icon" :href="$page.props.branding.faviconUrl" />
+    </Head>
+
     <div class="min-h-screen bg-stone-100">
         <nav class="border-b border-stone-200 bg-white/90 backdrop-blur">
             <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
