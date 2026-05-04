@@ -198,7 +198,7 @@ onBeforeUnmount(() => {
             @close-menu="menuOpen = false"
         />
 
-        <SideNavigation :navigation="navigation" :is-scrolled="isScrolled" />
+        <SideNavigation :settings="settings" :navigation="navigation" :is-scrolled="isScrolled" />
 
         <main>
             <HeroSection :settings="settings" :hero-background-style="heroBackgroundStyle" />
