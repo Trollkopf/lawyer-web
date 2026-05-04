@@ -3,6 +3,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import TextInput from '@/Components/TextInput.vue';
+import AdminSectionSwitch from '@/Components/Site/content/AdminSectionSwitch.vue';
 import { Head, useForm } from '@inertiajs/vue3';
 
 const props = defineProps({
@@ -44,6 +45,7 @@ const form = useForm({
         highlight_text: props.settings.hero?.highlight_text ?? '',
     },
     presentation: {
+        is_enabled: props.settings.presentation?.is_enabled ?? true,
         eyebrow: props.settings.presentation?.eyebrow ?? '',
         title: props.settings.presentation?.title ?? '',
         body: props.settings.presentation?.body ?? '',
@@ -51,26 +53,31 @@ const form = useForm({
         signature: props.settings.presentation?.signature ?? '',
     },
     services: {
+        is_enabled: props.settings.services?.is_enabled ?? true,
         eyebrow: props.settings.services?.eyebrow ?? '',
         title: props.settings.services?.title ?? '',
         description: props.settings.services?.description ?? '',
     },
     team: {
+        is_enabled: props.settings.team?.is_enabled ?? true,
         eyebrow: props.settings.team?.eyebrow ?? '',
         title: props.settings.team?.title ?? '',
         description: props.settings.team?.description ?? '',
     },
     cases: {
+        is_enabled: props.settings.cases?.is_enabled ?? true,
         eyebrow: props.settings.cases?.eyebrow ?? '',
         title: props.settings.cases?.title ?? '',
         description: props.settings.cases?.description ?? '',
     },
     testimonials: {
+        is_enabled: props.settings.testimonials?.is_enabled ?? true,
         eyebrow: props.settings.testimonials?.eyebrow ?? '',
         title: props.settings.testimonials?.title ?? '',
         description: props.settings.testimonials?.description ?? '',
     },
     contact: {
+        is_enabled: props.settings.contact?.is_enabled ?? true,
         eyebrow: props.settings.contact?.eyebrow ?? '',
         title: props.settings.contact?.title ?? '',
         description: props.settings.contact?.description ?? '',
@@ -284,6 +291,11 @@ const submit = () => {
                     </h2>
 
                     <div class="mt-8 grid gap-6">
+                        <AdminSectionSwitch
+                            v-model="form.presentation.is_enabled"
+                            label="Mostrar presentacion en la home"
+                            hint="Si lo desactivas, la seccion desaparece de la home y de la navegacion."
+                        />
                         <div>
                             <InputLabel for="presentation_eyebrow" value="Etiqueta" />
                             <TextInput id="presentation_eyebrow" v-model="form.presentation.eyebrow" type="text" class="mt-2 block w-full" />
@@ -326,6 +338,10 @@ const submit = () => {
                         <div class="rounded-3xl border border-stone-200 p-5">
                             <h3 class="font-serif text-xl text-stone-900">Roles</h3>
                             <div class="mt-4 space-y-4">
+                                <AdminSectionSwitch
+                                    v-model="form.services.is_enabled"
+                                    label="Mostrar roles en la home"
+                                />
                                 <TextInput v-model="form.services.eyebrow" type="text" class="block w-full" placeholder="Etiqueta" />
                                 <textarea v-model="form.services.title" rows="2" class="block w-full rounded-2xl border-stone-300 px-4 py-3 text-sm shadow-sm" placeholder="Titulo" />
                                 <textarea v-model="form.services.description" rows="8" class="block w-full rounded-2xl border-stone-300 px-4 py-3 text-sm shadow-sm" placeholder="Texto introductorio de la seccion de roles" />
@@ -335,6 +351,10 @@ const submit = () => {
                         <div class="rounded-3xl border border-stone-200 p-5">
                             <h3 class="font-serif text-xl text-stone-900">Abogados</h3>
                             <div class="mt-4 space-y-4">
+                                <AdminSectionSwitch
+                                    v-model="form.team.is_enabled"
+                                    label="Mostrar abogados en la home"
+                                />
                                 <TextInput v-model="form.team.eyebrow" type="text" class="block w-full" placeholder="Etiqueta" />
                                 <textarea v-model="form.team.title" rows="2" class="block w-full rounded-2xl border-stone-300 px-4 py-3 text-sm shadow-sm" placeholder="Titulo" />
                                 <textarea v-model="form.team.description" rows="3" class="block w-full rounded-2xl border-stone-300 px-4 py-3 text-sm shadow-sm" placeholder="Descripcion" />
@@ -344,6 +364,10 @@ const submit = () => {
                         <div class="rounded-3xl border border-stone-200 p-5">
                             <h3 class="font-serif text-xl text-stone-900">Casos</h3>
                             <div class="mt-4 space-y-4">
+                                <AdminSectionSwitch
+                                    v-model="form.cases.is_enabled"
+                                    label="Mostrar casos en la home"
+                                />
                                 <TextInput v-model="form.cases.eyebrow" type="text" class="block w-full" placeholder="Etiqueta" />
                                 <textarea v-model="form.cases.title" rows="2" class="block w-full rounded-2xl border-stone-300 px-4 py-3 text-sm shadow-sm" placeholder="Titulo" />
                                 <textarea v-model="form.cases.description" rows="3" class="block w-full rounded-2xl border-stone-300 px-4 py-3 text-sm shadow-sm" placeholder="Descripcion" />
@@ -353,6 +377,10 @@ const submit = () => {
                         <div class="rounded-3xl border border-stone-200 p-5">
                             <h3 class="font-serif text-xl text-stone-900">Opiniones</h3>
                             <div class="mt-4 space-y-4">
+                                <AdminSectionSwitch
+                                    v-model="form.testimonials.is_enabled"
+                                    label="Mostrar opiniones en la home"
+                                />
                                 <TextInput v-model="form.testimonials.eyebrow" type="text" class="block w-full" placeholder="Etiqueta" />
                                 <textarea v-model="form.testimonials.title" rows="2" class="block w-full rounded-2xl border-stone-300 px-4 py-3 text-sm shadow-sm" placeholder="Titulo" />
                                 <textarea v-model="form.testimonials.description" rows="3" class="block w-full rounded-2xl border-stone-300 px-4 py-3 text-sm shadow-sm" placeholder="Descripcion" />
@@ -377,6 +405,13 @@ const submit = () => {
                     </h2>
 
                     <div class="mt-8 grid gap-6 lg:grid-cols-2">
+                        <div class="lg:col-span-2">
+                            <AdminSectionSwitch
+                                v-model="form.contact.is_enabled"
+                                label="Mostrar contacto en la home"
+                                hint="Controla la seccion de contacto y su enlace en la navegacion."
+                            />
+                        </div>
                         <div>
                             <InputLabel for="contact_eyebrow" value="Etiqueta" />
                             <TextInput id="contact_eyebrow" v-model="form.contact.eyebrow" type="text" class="mt-2 block w-full" />

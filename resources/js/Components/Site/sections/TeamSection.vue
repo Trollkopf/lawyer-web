@@ -15,7 +15,7 @@ defineProps({
 </script>
 
 <template>
-    <section id="abogados" class="section-shell">
+    <section v-if="settings.team?.is_enabled !== false" id="abogados" class="section-shell">
         <div class="site-container">
             <SectionIntro
                 :eyebrow="settings.team.eyebrow"

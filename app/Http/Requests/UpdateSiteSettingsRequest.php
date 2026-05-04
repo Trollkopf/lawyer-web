@@ -36,28 +36,34 @@ class UpdateSiteSettingsRequest extends FormRequest
             'hero.highlight_title' => ['nullable', 'string', 'max:255'],
             'hero.highlight_text' => ['nullable', 'string'],
 
+            'presentation.is_enabled' => ['boolean'],
             'presentation.eyebrow' => ['nullable', 'string', 'max:255'],
             'presentation.title' => ['required', 'string', 'max:255'],
             'presentation.body' => ['required', 'string'],
             'presentation.quote' => ['nullable', 'string', 'max:255'],
             'presentation.signature' => ['nullable', 'string', 'max:255'],
 
+            'services.is_enabled' => ['boolean'],
             'services.eyebrow' => ['nullable', 'string', 'max:255'],
             'services.title' => ['required', 'string', 'max:255'],
             'services.description' => ['required', 'string'],
 
+            'team.is_enabled' => ['boolean'],
             'team.eyebrow' => ['nullable', 'string', 'max:255'],
             'team.title' => ['required', 'string', 'max:255'],
             'team.description' => ['required', 'string'],
 
+            'cases.is_enabled' => ['boolean'],
             'cases.eyebrow' => ['nullable', 'string', 'max:255'],
             'cases.title' => ['required', 'string', 'max:255'],
             'cases.description' => ['required', 'string'],
 
+            'testimonials.is_enabled' => ['boolean'],
             'testimonials.eyebrow' => ['nullable', 'string', 'max:255'],
             'testimonials.title' => ['required', 'string', 'max:255'],
             'testimonials.description' => ['required', 'string'],
 
+            'contact.is_enabled' => ['boolean'],
             'contact.eyebrow' => ['nullable', 'string', 'max:255'],
             'contact.title' => ['required', 'string', 'max:255'],
             'contact.description' => ['required', 'string'],

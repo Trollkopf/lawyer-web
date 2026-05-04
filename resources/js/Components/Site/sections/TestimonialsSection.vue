@@ -1,8 +1,10 @@
 <script setup>
+import { computed, ref, watch } from 'vue';
 import SectionIntro from '../content/SectionIntro.vue';
+import SectionTabList from '../content/SectionTabList.vue';
 import TestimonialCard from '../cards/TestimonialCard.vue';
 
-defineProps({
+const props = defineProps({
     settings: {
         type: Object,
         required: true,
@@ -12,10 +14,29 @@ defineProps({
         required: true,
     },
 });
+
+const activeOpinionId = ref(props.testimonials[0]?.id ?? null);
+
+watch(
+    () => props.testimonials,
+    (items) => {
+        if (!items.length) {
+            activeOpinionId.value = null;
+            return;
+        }
+
+        if (!items.some((item) => item.id === activeOpinionId.value)) {
+            activeOpinionId.value = items[0].id;
+        }
+    },
+    { immediate: true },
+);
+
+const activeOpinion = computed(() => props.testimonials.find((item) => item.id === activeOpinionId.value) ?? null);
 </script>
 
 <template>
-    <section id="opiniones" class="section-shell">
+    <section v-if="settings.testimonials?.is_enabled !== false" id="opiniones" class="section-shell">
         <div class="site-container">
             <SectionIntro
                 :eyebrow="settings.testimonials.eyebrow"
@@ -23,14 +44,22 @@ defineProps({
                 :description="settings.testimonials.description"
             />
 
-            <div class="mt-12 grid gap-6 lg:grid-cols-3">
-                <TestimonialCard
-                    v-for="testimonial in testimonials"
-                    :key="testimonial.id"
-                    :testimonial="testimonial"
+            <div class="mt-12 grid gap-6 lg:grid-cols-[19rem_minmax(0,1fr)] lg:items-start">
+                <SectionTabList
+                    v-if="testimonials.length"
+                    :items="testimonials"
+                    :active-id="activeOpinionId"
+                    label-key="client_name"
+                    secondary-key="matter"
+                    @select="activeOpinionId = $event"
                 />
 
-                <article v-if="!testimonials.length" class="surface-panel p-8 lg:col-span-3">
+                <TestimonialCard
+                    v-if="activeOpinion"
+                    :testimonial="activeOpinion"
+                />
+
+                <article v-if="!testimonials.length" class="surface-panel p-8 lg:col-span-2">
                     <h3 class="font-serif text-2xl text-[var(--color-text)]">
                         La seccion de opiniones esta lista para testimonios reales
                     </h3>

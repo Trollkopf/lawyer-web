@@ -26,7 +26,7 @@ defineEmits(['submit']);
 </script>
 
 <template>
-    <section id="contacto" class="section-shell bg-[var(--color-text)] text-white">
+    <section v-if="settings.contact?.is_enabled !== false" id="contacto" class="section-shell bg-[var(--color-text)] text-white">
         <div class="site-container grid gap-10 lg:grid-cols-[0.92fr_1.08fr]">
             <div>
                 <SectionIntro

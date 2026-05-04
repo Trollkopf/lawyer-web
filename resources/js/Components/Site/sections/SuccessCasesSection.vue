@@ -1,8 +1,10 @@
 <script setup>
+import { computed, ref, watch } from 'vue';
 import SectionIntro from '../content/SectionIntro.vue';
+import SectionTabList from '../content/SectionTabList.vue';
 import SuccessCaseCard from '../cards/SuccessCaseCard.vue';
 
-defineProps({
+const props = defineProps({
     settings: {
         type: Object,
         required: true,
@@ -12,10 +14,29 @@ defineProps({
         required: true,
     },
 });
+
+const activeCaseId = ref(props.successCases[0]?.id ?? null);
+
+watch(
+    () => props.successCases,
+    (items) => {
+        if (!items.length) {
+            activeCaseId.value = null;
+            return;
+        }
+
+        if (!items.some((item) => item.id === activeCaseId.value)) {
+            activeCaseId.value = items[0].id;
+        }
+    },
+    { immediate: true },
+);
+
+const activeCase = computed(() => props.successCases.find((item) => item.id === activeCaseId.value) ?? null);
 </script>
 
 <template>
-    <section id="casos" class="section-shell bg-[var(--color-bg-soft)]">
+    <section v-if="settings.cases?.is_enabled !== false" id="casos" class="section-shell bg-[var(--color-bg-soft)]">
         <div class="site-container">
             <SectionIntro
                 :eyebrow="settings.cases.eyebrow"
@@ -23,14 +44,21 @@ defineProps({
                 :description="settings.cases.description"
             />
 
-            <div class="mt-12 grid gap-6 lg:grid-cols-3">
-                <SuccessCaseCard
-                    v-for="caseItem in successCases"
-                    :key="caseItem.id"
-                    :case-item="caseItem"
+            <div class="mt-12 grid gap-6 lg:grid-cols-[19rem_minmax(0,1fr)] lg:items-start">
+                <SectionTabList
+                    v-if="successCases.length"
+                    :items="successCases"
+                    :active-id="activeCaseId"
+                    secondary-key="practice_area"
+                    @select="activeCaseId = $event"
                 />
 
-                <article v-if="!successCases.length" class="surface-panel p-8 lg:col-span-3">
+                <SuccessCaseCard
+                    v-if="activeCase"
+                    :case-item="activeCase"
+                />
+
+                <article v-if="!successCases.length" class="surface-panel p-8 lg:col-span-2">
                     <h3 class="font-serif text-2xl text-[var(--color-text)]">
                         Casos listos para publicar con criterio prudente
                     </h3>

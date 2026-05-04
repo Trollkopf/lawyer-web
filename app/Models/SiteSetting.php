@@ -65,6 +65,7 @@ class SiteSetting extends Model
                 'highlight_text' => 'La web esta preparada para incorporar una fotografia editorial del abogado o del despacho desde el panel.',
             ],
             'presentation' => [
+                'is_enabled' => true,
                 'eyebrow' => 'Presentacion',
                 'title' => 'Cada asunto exige escucha, analisis y una estrategia bien definida.',
                 'body' => 'Nuestro despacho trabaja desde la claridad y la confianza, explicando cada fase del proceso para que el cliente pueda tomar decisiones con seguridad.',
@@ -72,26 +73,31 @@ class SiteSetting extends Model
                 'signature' => 'Firma o nombre del abogado',
             ],
             'services' => [
+                'is_enabled' => true,
                 'eyebrow' => 'Servicios',
                 'title' => 'Asesoramiento legal adaptado a cada situacion.',
                 'description' => 'Desde la prevencion de conflictos hasta la defensa judicial, cada servicio puede editarse individualmente desde el backoffice.',
             ],
             'team' => [
+                'is_enabled' => true,
                 'eyebrow' => 'Equipo legal',
                 'title' => 'Perfiles profesionales con enfoque claro y trato personalizado.',
                 'description' => 'Cada abogado puede mostrar su enfoque de trabajo, tipo de cliente y principales areas de acompanamiento.',
             ],
             'cases' => [
+                'is_enabled' => true,
                 'eyebrow' => 'Casos de exito',
                 'title' => 'Experiencia aplicada con prudencia y confidencialidad.',
                 'description' => 'Esta seccion esta pensada para publicar casos reales anonimizados y autorizados, sin comprometer informacion sensible.',
             ],
             'testimonials' => [
+                'is_enabled' => true,
                 'eyebrow' => 'Opiniones',
                 'title' => 'Valoraciones reales, presentadas con sobriedad.',
                 'description' => 'Cuando el cliente facilite resenas verificadas, podran publicarse aqui y ordenarse desde el panel.',
             ],
             'contact' => [
+                'is_enabled' => true,
                 'eyebrow' => 'Contacto',
                 'title' => 'Cuentanos tu caso.',
                 'description' => 'Estudiaremos tu situacion y te indicaremos la mejor forma de proceder con claridad y honestidad.',

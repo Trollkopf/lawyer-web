@@ -114,6 +114,22 @@
         @apply rounded-lg border border-[var(--color-border)] bg-[var(--color-bg-soft)];
     }
 
+    .section-tab-list {
+        @apply flex gap-3 overflow-x-auto pb-2 lg:flex-col lg:overflow-visible lg:pb-0;
+    }
+
+    .section-tab-button {
+        @apply min-w-[14rem] rounded-2xl border px-5 py-4 transition focus:outline-none focus:ring-2 focus:ring-[var(--color-burgundy)] focus:ring-offset-2 lg:min-w-0;
+    }
+
+    .section-tab-button-idle {
+        @apply border-[var(--color-border)] bg-white text-[var(--color-text-muted)] hover:border-[var(--color-green)] hover:bg-[var(--color-bg-soft)] hover:text-[var(--color-text)];
+    }
+
+    .section-tab-button-active {
+        @apply border-[var(--color-burgundy)] bg-[linear-gradient(135deg,rgba(109,31,47,0.08),rgba(220,238,227,0.52))] text-[var(--color-text)] shadow-[0_18px_40px_rgba(31,36,33,0.08)];
+    }
+
     .eyebrow-divider {
         @apply h-px w-16 bg-[var(--color-gold-soft)];
     }
@@ -128,5 +144,25 @@
 
     .admin-card {
         @apply rounded-xl border border-stone-200 bg-white p-6 shadow-sm;
+    }
+
+    .admin-switch {
+        @apply flex items-center justify-between gap-4 rounded-2xl border border-stone-200 bg-stone-50 px-4 py-4;
+    }
+
+    .admin-switch-track {
+        @apply relative inline-flex h-7 w-12 shrink-0 rounded-full transition;
+    }
+
+    .admin-switch-track-on {
+        @apply bg-[var(--color-burgundy)];
+    }
+
+    .admin-switch-track-off {
+        @apply bg-stone-300;
+    }
+
+    .admin-switch-thumb {
+        @apply absolute left-1 top-1 h-5 w-5 rounded-full bg-white shadow-sm transition-transform;
     }
 }

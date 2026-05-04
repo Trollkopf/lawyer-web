@@ -48,15 +48,35 @@ const contactForm = useForm({
     company: '',
 });
 
-const navigation = [
-    { label: 'Inicio', href: '#inicio' },
-    { label: 'Presentacion', href: '#presentacion' },
-    { label: 'Servicios', href: '#servicios' },
-    { label: 'Abogados', href: '#abogados' },
-    { label: 'Casos', href: '#casos' },
-    { label: 'Opiniones', href: '#opiniones' },
-    { label: 'Contacto', href: '#contacto' },
-];
+const navigation = computed(() => {
+    const items = [{ label: 'Inicio', href: '#inicio' }];
+
+    if (props.settings.presentation?.is_enabled !== false) {
+        items.push({ label: 'Presentacion', href: '#presentacion' });
+    }
+
+    if (props.settings.services?.is_enabled !== false) {
+        items.push({ label: 'Roles', href: '#servicios' });
+    }
+
+    if (props.settings.team?.is_enabled !== false) {
+        items.push({ label: 'Abogados', href: '#abogados' });
+    }
+
+    if (props.settings.cases?.is_enabled !== false) {
+        items.push({ label: 'Casos', href: '#casos' });
+    }
+
+    if (props.settings.testimonials?.is_enabled !== false) {
+        items.push({ label: 'Opiniones', href: '#opiniones' });
+    }
+
+    if (props.settings.contact?.is_enabled !== false) {
+        items.push({ label: 'Contacto', href: '#contacto' });
+    }
+
+    return items;
+});
 
 const syncScrolledState = () => {
     if (typeof window === 'undefined') {

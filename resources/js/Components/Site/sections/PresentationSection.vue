@@ -16,7 +16,7 @@ defineProps({
 </script>
 
 <template>
-    <section id="presentacion" class="section-shell">
+    <section v-if="settings.presentation?.is_enabled !== false" id="presentacion" class="section-shell">
         <div class="site-container">
             <div class="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
                 <div>
