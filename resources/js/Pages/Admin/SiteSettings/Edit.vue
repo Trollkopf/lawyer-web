@@ -173,6 +173,10 @@ const submit = () => {
         onSuccess: () => form.reset('logo', 'hero_image'),
     });
 };
+
+const resetThemeToDefaults = () => {
+    form.theme = { ...defaultTheme };
+};
 </script>
 
 <template>
@@ -266,15 +270,28 @@ const submit = () => {
                 </section>
 
                 <section class="admin-card">
-                    <p class="text-sm uppercase tracking-[0.24em] text-[var(--color-burgundy)]">
-                        Identidad visual
-                    </p>
-                    <h2 class="mt-2 font-serif text-2xl text-stone-900">
-                        Colores de la web
-                    </h2>
-                    <p class="mt-2 max-w-3xl text-sm text-stone-500">
-                        Puedes ajustar la paleta principal de la web desde aqui. Se aplicara a la parte publica, no al backoffice.
-                    </p>
+                    <div class="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
+                        <div>
+                            <p class="text-sm uppercase tracking-[0.24em] text-[var(--color-burgundy)]">
+                                Identidad visual
+                            </p>
+                            <h2 class="mt-2 font-serif text-2xl text-stone-900">
+                                Colores de la web
+                            </h2>
+                            <p class="mt-2 max-w-3xl text-sm text-stone-500">
+                                Puedes ajustar la paleta principal de la web desde aqui. Se aplicara a la parte publica, no al backoffice.
+                            </p>
+                        </div>
+                        <div>
+                            <button
+                                type="button"
+                                class="inline-flex items-center justify-center rounded-md border border-stone-300 px-4 py-2 text-sm font-semibold text-stone-700 transition hover:border-stone-400 hover:bg-stone-50"
+                                @click="resetThemeToDefaults"
+                            >
+                                Restaurar paleta por defecto
+                            </button>
+                        </div>
+                    </div>
 
                     <div class="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
                         <div class="rounded-3xl border border-stone-200 p-4" v-for="field in [
