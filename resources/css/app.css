@@ -75,11 +75,11 @@
     }
 
     .hero-stage {
-        @apply relative isolate overflow-hidden rounded-[2rem] border border-[var(--color-border)] shadow-[0_34px_90px_rgba(31,36,33,0.12)];
+        @apply relative isolate min-h-[36rem];
     }
 
     .hero-stage-overlay {
-        @apply pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(109,31,47,0.08),transparent_32%),radial-gradient(circle_at_bottom_left,rgba(69,107,85,0.1),transparent_28%)];
+        @apply pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(109,31,47,0.1),transparent_28%),radial-gradient(circle_at_bottom_left,rgba(69,107,85,0.12),transparent_26%)];
     }
 
     .hero-stat {
@@ -99,15 +99,11 @@
     }
 
     .side-nav-rail {
-        @apply flex flex-col gap-3 rounded-[1.5rem] border border-[var(--color-border)] bg-white/90 p-4 shadow-[0_20px_60px_rgba(31,36,33,0.12)] backdrop-blur;
+        @apply flex h-screen w-44 flex-col justify-center gap-2 border-r border-[var(--color-border)] bg-white/90 px-6;
     }
 
     .side-nav-link {
-        @apply inline-flex items-center gap-3 rounded-full px-3 py-2 text-sm font-semibold text-[var(--color-text-muted)] transition hover:bg-[var(--color-bg-soft)] hover:text-[var(--color-burgundy)] focus:outline-none focus:ring-2 focus:ring-[var(--color-burgundy)] focus:ring-offset-2;
-    }
-
-    .side-nav-dot {
-        @apply h-2 w-2 rounded-full bg-[var(--color-burgundy)];
+        @apply inline-flex min-h-10 items-center px-0 text-sm font-semibold text-[var(--color-text-muted)] transition hover:text-[var(--color-burgundy)] focus:outline-none focus:ring-2 focus:ring-[var(--color-burgundy)] focus:ring-offset-2;
     }
 
     .surface-panel {

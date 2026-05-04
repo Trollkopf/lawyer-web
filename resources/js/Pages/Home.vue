@@ -130,24 +130,24 @@ onBeforeUnmount(() => {
 
         <header class="sticky top-0 z-40 border-b border-[var(--color-border)] bg-white/85 backdrop-blur-xl">
             <div class="site-container flex h-20 items-center justify-between gap-6">
-                <a href="#inicio" class="flex min-w-0 items-center gap-4">
+                <a href="#inicio" class="flex items-center gap-4">
                     <div
                         v-if="settings.logo_url"
-                        class="flex h-12 min-w-[3rem] items-center justify-center rounded-md border border-[var(--color-border)] bg-white px-3"
+                        class="flex h-12 items-center justify-center"
                     >
                         <img :src="settings.logo_url" :alt="`Logo de ${settings.site_name}`" class="max-h-8 w-auto object-contain">
                     </div>
                     <div
                         v-else
-                        class="flex h-12 w-12 items-center justify-center rounded-full border border-[var(--color-border)] bg-[var(--color-bg-soft)] font-serif text-lg font-semibold text-[var(--color-burgundy)]"
+                        class="flex h-12 w-12 items-center justify-center font-serif text-2xl font-semibold text-[var(--color-burgundy)]"
                     >
                         {{ initialsFor(settings.site_name || 'DL').slice(0, 2) }}
                     </div>
-                    <div class="min-w-0">
-                        <p class="truncate font-serif text-lg font-semibold text-[var(--color-text)]">
+                    <div class="flex flex-col">
+                        <p class="font-serif text-lg font-semibold leading-tight text-[var(--color-text)]">
                             {{ settings.site_name }}
                         </p>
-                        <p class="truncate text-sm text-[var(--color-text-muted)]">
+                        <p class="text-sm text-[var(--color-text-muted)]">
                             {{ settings.site_city }}
                         </p>
                     </div>
@@ -168,20 +168,6 @@ onBeforeUnmount(() => {
                 </nav>
 
                 <div class="hidden items-center gap-3 lg:flex">
-                    <Link
-                        v-if="$page.props.auth.user"
-                        :href="route('dashboard')"
-                        class="cta-secondary"
-                    >
-                        Backoffice
-                    </Link>
-                    <Link
-                        v-else
-                        :href="route('login')"
-                        class="cta-secondary"
-                    >
-                        Acceso
-                    </Link>
                     <a :href="settings.hero.primary_target" class="cta-primary">
                         {{ settings.hero.primary_label }}
                     </a>
@@ -218,7 +204,7 @@ onBeforeUnmount(() => {
         </header>
 
         <nav
-            class="pointer-events-none fixed left-6 top-1/2 z-50 hidden -translate-y-1/2 transition duration-300 lg:block"
+            class="pointer-events-none fixed left-0 top-0 z-50 hidden h-screen transition duration-300 lg:block"
             :class="isScrolled ? 'translate-x-0 opacity-100' : '-translate-x-8 opacity-0'"
             aria-label="Navegacion lateral"
         >
@@ -229,80 +215,63 @@ onBeforeUnmount(() => {
                     :href="item.href"
                     class="side-nav-link"
                 >
-                    <span class="side-nav-dot" />
                     <span>{{ item.label }}</span>
                 </a>
             </div>
         </nav>
 
         <main>
-            <section id="inicio" class="section-shell pt-10 md:pt-16">
-                <div class="site-container">
-                    <div class="hero-stage" :style="heroBackgroundStyle">
-                        <div class="hero-stage-overlay" />
-                        <div class="relative grid min-h-[36rem] gap-10 p-8 md:min-h-[40rem] md:p-12 lg:grid-cols-[minmax(0,1.1fr)_minmax(18rem,0.55fr)] lg:items-end lg:p-16">
-                            <div class="max-w-3xl">
-                                <p class="hero-kicker">
-                                    {{ settings.hero.eyebrow }}
-                                </p>
-                                <h1 class="hero-title">
-                                    {{ settings.hero.title }}
-                                </h1>
-                                <p class="hero-copy">
-                                    {{ settings.hero.description }}
-                                </p>
+            <section id="inicio" class="relative overflow-hidden">
+                <div class="hero-stage" :style="heroBackgroundStyle">
+                    <div class="hero-stage-overlay" />
+                    <div class="site-container relative min-h-[36rem] py-16 md:min-h-[40rem] md:py-20 lg:flex lg:items-end lg:py-24">
+                        <div class="max-w-3xl">
+                            <p class="hero-kicker">
+                                {{ settings.hero.eyebrow }}
+                            </p>
+                            <h1 class="hero-title">
+                                {{ settings.hero.title }}
+                            </h1>
+                            <p class="hero-copy">
+                                {{ settings.hero.description }}
+                            </p>
 
-                                <div class="mt-10 flex flex-col gap-4 sm:flex-row">
-                                    <a :href="settings.hero.primary_target" class="cta-primary">
-                                        {{ settings.hero.primary_label }}
-                                    </a>
-                                    <a
-                                        v-if="settings.hero.secondary_label"
-                                        :href="settings.hero.secondary_target"
-                                        class="cta-secondary hero-secondary-button"
-                                    >
-                                        {{ settings.hero.secondary_label }}
-                                    </a>
-                                </div>
-
-                                <div class="mt-12 grid gap-4 sm:grid-cols-3">
-                                    <div class="hero-stat">
-                                        <p class="text-xs font-semibold uppercase tracking-[0.22em] text-[var(--color-burgundy)]">
-                                            Ciudad
-                                        </p>
-                                        <p class="mt-3 font-sans text-xl font-semibold uppercase tracking-[-0.03em] text-[var(--color-text)]">
-                                            {{ settings.site_city }}
-                                        </p>
-                                    </div>
-                                    <div class="hero-stat">
-                                        <p class="text-xs font-semibold uppercase tracking-[0.22em] text-[var(--color-burgundy)]">
-                                            Contacto
-                                        </p>
-                                        <p class="mt-3 text-sm leading-7 text-[var(--color-text)]">
-                                            {{ settings.primary_phone }}
-                                        </p>
-                                    </div>
-                                    <div class="hero-stat">
-                                        <p class="text-xs font-semibold uppercase tracking-[0.22em] text-[var(--color-burgundy)]">
-                                            Enfoque
-                                        </p>
-                                        <p class="mt-3 text-sm leading-7 text-[var(--color-text)]">
-                                            {{ settings.site_tagline }}
-                                        </p>
-                                    </div>
-                                </div>
+                            <div class="mt-10 flex flex-col gap-4 sm:flex-row">
+                                <a :href="settings.hero.primary_target" class="cta-primary">
+                                    {{ settings.hero.primary_label }}
+                                </a>
+                                <a
+                                    v-if="settings.hero.secondary_label"
+                                    :href="settings.hero.secondary_target"
+                                    class="cta-secondary hero-secondary-button"
+                                >
+                                    {{ settings.hero.secondary_label }}
+                                </a>
                             </div>
 
-                            <div v-if="settings.hero.highlight_title || settings.hero.highlight_text" class="flex lg:justify-end">
-                                <div class="hero-highlight">
-                                    <div class="hero-chip mb-6 w-fit">
-                                        {{ settings.site_city }}
-                                    </div>
-                                    <p v-if="settings.hero.highlight_title" class="font-sans text-xl font-semibold uppercase tracking-[-0.03em] text-[var(--color-text)]">
-                                        {{ settings.hero.highlight_title }}
+                            <div class="mt-12 grid gap-4 sm:grid-cols-3">
+                                <div class="hero-stat">
+                                    <p class="text-xs font-semibold uppercase tracking-[0.22em] text-[var(--color-burgundy)]">
+                                        Ciudad
                                     </p>
-                                    <p v-if="settings.hero.highlight_text" class="mt-4 text-sm leading-7 text-[var(--color-text-muted)]">
-                                        {{ settings.hero.highlight_text }}
+                                    <p class="mt-3 font-sans text-xl font-semibold uppercase tracking-[-0.03em] text-[var(--color-text)]">
+                                        {{ settings.site_city }}
+                                    </p>
+                                </div>
+                                <div class="hero-stat">
+                                    <p class="text-xs font-semibold uppercase tracking-[0.22em] text-[var(--color-burgundy)]">
+                                        Contacto
+                                    </p>
+                                    <p class="mt-3 text-sm leading-7 text-[var(--color-text)]">
+                                        {{ settings.primary_phone }}
+                                    </p>
+                                </div>
+                                <div class="hero-stat">
+                                    <p class="text-xs font-semibold uppercase tracking-[0.22em] text-[var(--color-burgundy)]">
+                                        Enfoque
+                                    </p>
+                                    <p class="mt-3 text-sm leading-7 text-[var(--color-text)]">
+                                        {{ settings.site_tagline }}
                                     </p>
                                 </div>
                             </div>
@@ -321,6 +290,20 @@ onBeforeUnmount(() => {
                             <h2 class="section-title">
                                 {{ settings.presentation.title }}
                             </h2>
+                            <div
+                                v-if="settings.hero.highlight_title || settings.hero.highlight_text"
+                                class="hero-highlight mt-8 max-w-md"
+                            >
+                                <div class="hero-chip mb-6 w-fit">
+                                    {{ settings.site_city }}
+                                </div>
+                                <p v-if="settings.hero.highlight_title" class="font-sans text-xl font-semibold uppercase tracking-[-0.03em] text-[var(--color-text)]">
+                                    {{ settings.hero.highlight_title }}
+                                </p>
+                                <p v-if="settings.hero.highlight_text" class="mt-4 text-sm leading-7 text-[var(--color-text-muted)]">
+                                    {{ settings.hero.highlight_text }}
+                                </p>
+                            </div>
                         </div>
 
                         <div class="space-y-8">
