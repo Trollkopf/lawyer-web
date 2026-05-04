@@ -11,7 +11,7 @@ import TeamSection from '@/Components/Site/sections/TeamSection.vue';
 import SuccessCasesSection from '@/Components/Site/sections/SuccessCasesSection.vue';
 import TestimonialsSection from '@/Components/Site/sections/TestimonialsSection.vue';
 import ContactSection from '@/Components/Site/sections/ContactSection.vue';
-import { splitParagraphs } from '@/Components/Site/utils/site.js';
+import { isSectionEnabled, splitParagraphs } from '@/Components/Site/utils/site.js';
 
 const props = defineProps({
     settings: {
@@ -51,27 +51,27 @@ const contactForm = useForm({
 const navigation = computed(() => {
     const items = [{ label: 'Inicio', href: '#inicio' }];
 
-    if (props.settings.presentation?.is_enabled !== false) {
+    if (isSectionEnabled(props.settings.presentation)) {
         items.push({ label: 'Presentacion', href: '#presentacion' });
     }
 
-    if (props.settings.services?.is_enabled !== false) {
+    if (isSectionEnabled(props.settings.services)) {
         items.push({ label: 'Roles', href: '#servicios' });
     }
 
-    if (props.settings.team?.is_enabled !== false) {
+    if (isSectionEnabled(props.settings.team)) {
         items.push({ label: 'Abogados', href: '#abogados' });
     }
 
-    if (props.settings.cases?.is_enabled !== false) {
+    if (isSectionEnabled(props.settings.cases)) {
         items.push({ label: 'Casos', href: '#casos' });
     }
 
-    if (props.settings.testimonials?.is_enabled !== false) {
+    if (isSectionEnabled(props.settings.testimonials)) {
         items.push({ label: 'Opiniones', href: '#opiniones' });
     }
 
-    if (props.settings.contact?.is_enabled !== false) {
+    if (isSectionEnabled(props.settings.contact)) {
         items.push({ label: 'Contacto', href: '#contacto' });
     }
 

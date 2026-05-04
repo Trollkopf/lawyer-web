@@ -2,6 +2,7 @@
 import ContactFormCard from '../forms/ContactFormCard.vue';
 import ContactInfoCard from '../cards/ContactInfoCard.vue';
 import SectionIntro from '../content/SectionIntro.vue';
+import { isSectionEnabled } from '../utils/site.js';
 
 defineProps({
     settings: {
@@ -26,7 +27,7 @@ defineEmits(['submit']);
 </script>
 
 <template>
-    <section v-if="settings.contact?.is_enabled !== false" id="contacto" class="section-shell bg-[var(--color-text)] text-white">
+    <section v-if="isSectionEnabled(settings.contact)" id="contacto" class="section-shell bg-[var(--color-text)] text-white">
         <div class="site-container grid gap-10 lg:grid-cols-[0.92fr_1.08fr]">
             <div>
                 <SectionIntro

@@ -3,6 +3,7 @@ import { computed, ref, watch } from 'vue';
 import SectionIntro from '../content/SectionIntro.vue';
 import SectionTabList from '../content/SectionTabList.vue';
 import TestimonialCard from '../cards/TestimonialCard.vue';
+import { isSectionEnabled } from '../utils/site.js';
 
 const props = defineProps({
     settings: {
@@ -36,7 +37,7 @@ const activeOpinion = computed(() => props.testimonials.find((item) => item.id =
 </script>
 
 <template>
-    <section v-if="settings.testimonials?.is_enabled !== false" id="opiniones" class="section-shell">
+    <section v-if="isSectionEnabled(settings.testimonials)" id="opiniones" class="section-shell">
         <div class="site-container site-container-wide">
             <SectionIntro
                 :eyebrow="settings.testimonials.eyebrow"

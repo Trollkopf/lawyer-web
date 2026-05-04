@@ -1,6 +1,7 @@
 <script setup>
 import SectionIntro from '../content/SectionIntro.vue';
 import LawyerCard from '../cards/LawyerCard.vue';
+import { isSectionEnabled } from '../utils/site.js';
 
 defineProps({
     settings: {
@@ -15,8 +16,8 @@ defineProps({
 </script>
 
 <template>
-    <section v-if="settings.team?.is_enabled !== false" id="abogados" class="section-shell">
-        <div class="site-container">
+    <section v-if="isSectionEnabled(settings.team)" id="abogados" class="section-shell">
+        <div class="site-container site-container-wide">
             <SectionIntro
                 :eyebrow="settings.team.eyebrow"
                 :title="settings.team.title"

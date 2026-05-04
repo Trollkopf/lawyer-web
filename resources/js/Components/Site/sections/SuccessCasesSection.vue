@@ -3,6 +3,7 @@ import { computed, ref, watch } from 'vue';
 import SectionIntro from '../content/SectionIntro.vue';
 import SectionTabList from '../content/SectionTabList.vue';
 import SuccessCaseCard from '../cards/SuccessCaseCard.vue';
+import { isSectionEnabled } from '../utils/site.js';
 
 const props = defineProps({
     settings: {
@@ -36,7 +37,7 @@ const activeCase = computed(() => props.successCases.find((item) => item.id === 
 </script>
 
 <template>
-    <section v-if="settings.cases?.is_enabled !== false" id="casos" class="section-shell bg-[var(--color-bg-soft)]">
+    <section v-if="isSectionEnabled(settings.cases)" id="casos" class="section-shell bg-[var(--color-bg-soft)]">
         <div class="site-container site-container-wide">
             <SectionIntro
                 :eyebrow="settings.cases.eyebrow"

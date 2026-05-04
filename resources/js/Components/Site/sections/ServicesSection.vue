@@ -3,6 +3,7 @@ import { computed, ref, watch } from 'vue';
 import SectionIntro from '../content/SectionIntro.vue';
 import SectionTabList from '../content/SectionTabList.vue';
 import ServiceCard from '../cards/ServiceCard.vue';
+import { isSectionEnabled } from '../utils/site.js';
 
 const props = defineProps({
     settings: {
@@ -36,7 +37,7 @@ const activeService = computed(() => props.services.find((item) => item.id === a
 </script>
 
 <template>
-    <section v-if="settings.services?.is_enabled !== false" id="servicios" class="section-shell bg-[var(--color-bg-soft)]">
+    <section v-if="isSectionEnabled(settings.services)" id="servicios" class="section-shell bg-[var(--color-bg-soft)]">
         <div class="site-container site-container-wide">
             <SectionIntro
                 :eyebrow="settings.services.eyebrow"
