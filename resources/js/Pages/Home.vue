@@ -1,6 +1,6 @@
 <script setup>
 import { computed, onBeforeUnmount, onMounted, ref } from 'vue';
-import { Head, Link, useForm } from '@inertiajs/vue3';
+import { Head, useForm } from '@inertiajs/vue3';
 
 const props = defineProps({
     settings: {
@@ -70,6 +70,11 @@ const heroBackgroundStyle = computed(() => {
     };
 });
 
+const presentationParagraphs = computed(() => (props.settings.presentation?.body || '')
+    .split(/\r?\n\s*\r?\n/)
+    .map((paragraph) => paragraph.trim())
+    .filter(Boolean));
+
 const structuredData = computed(() => JSON.stringify({
     '@context': 'https://schema.org',
     '@type': 'LegalService',
@@ -133,9 +138,9 @@ onBeforeUnmount(() => {
                 <a href="#inicio" class="flex items-center gap-4">
                     <div
                         v-if="settings.logo_url"
-                        class="flex h-12 items-center justify-center"
+                        class="flex h-14 items-center justify-center"
                     >
-                        <img :src="settings.logo_url" :alt="`Logo de ${settings.site_name}`" class="max-h-8 w-auto object-contain">
+                        <img :src="settings.logo_url" :alt="`Logo de ${settings.site_name}`" class="max-h-11 w-auto object-contain">
                     </div>
                     <div
                         v-else
@@ -224,7 +229,7 @@ onBeforeUnmount(() => {
             <section id="inicio" class="relative overflow-hidden">
                 <div class="hero-stage" :style="heroBackgroundStyle">
                     <div class="hero-stage-overlay" />
-                    <div class="site-container relative min-h-[36rem] py-16 md:min-h-[40rem] md:py-20 lg:flex lg:items-end lg:py-24">
+                    <div class="site-container relative min-h-[36rem] py-16 md:min-h-[40rem] md:py-20 lg:grid lg:grid-cols-[minmax(0,1.1fr)_minmax(18rem,0.55fr)] lg:items-end lg:gap-10 lg:py-24">
                         <div class="max-w-3xl">
                             <p class="hero-kicker">
                                 {{ settings.hero.eyebrow }}
@@ -276,24 +281,9 @@ onBeforeUnmount(() => {
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </section>
 
-            <section id="presentacion" class="section-shell">
-                <div class="site-container">
-                    <div class="grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
-                        <div>
-                            <p class="section-kicker">
-                                {{ settings.presentation.eyebrow }}
-                            </p>
-                            <h2 class="section-title">
-                                {{ settings.presentation.title }}
-                            </h2>
-                            <div
-                                v-if="settings.hero.highlight_title || settings.hero.highlight_text"
-                                class="hero-highlight mt-8 max-w-md"
-                            >
+                        <div v-if="settings.hero.highlight_title || settings.hero.highlight_text" class="mt-10 flex lg:mt-0 lg:justify-end">
+                            <div class="hero-highlight">
                                 <div class="hero-chip mb-6 w-fit">
                                     {{ settings.site_city }}
                                 </div>
@@ -305,13 +295,24 @@ onBeforeUnmount(() => {
                                 </p>
                             </div>
                         </div>
+                    </div>
 
-                        <div class="space-y-8">
-                            <p class="text-lg leading-9 text-[var(--color-text-muted)]">
-                                {{ settings.presentation.body }}
+                </div>
+            </section>
+
+            <section id="presentacion" class="section-shell">
+                <div class="site-container">
+                    <div class="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
+                        <div>
+                            <p class="section-kicker">
+                                {{ settings.presentation.eyebrow }}
                             </p>
+                            <h2 class="section-title">
+                                {{ settings.presentation.title }}
+                            </h2>
+                        </div>
 
-                            <div class="surface-panel p-8 md:p-10">
+                        <div class="surface-panel p-8 md:p-10">
                                 <div class="eyebrow-divider" />
                                 <p class="mt-6 font-serif text-2xl leading-10 text-[var(--color-text)]">
                                     “{{ settings.presentation.quote }}”
@@ -321,6 +322,15 @@ onBeforeUnmount(() => {
                                 </p>
                             </div>
                         </div>
+
+                    <div class="mt-12 space-y-6">
+                        <p
+                            v-for="(paragraph, index) in presentationParagraphs"
+                            :key="`presentation-paragraph-${index}`"
+                            class="max-w-5xl text-lg leading-9 text-[var(--color-text-muted)]"
+                        >
+                            {{ paragraph }}
+                        </p>
                     </div>
                 </div>
             </section>
