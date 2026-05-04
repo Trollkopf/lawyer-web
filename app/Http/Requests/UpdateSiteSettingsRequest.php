@@ -37,6 +37,7 @@ class UpdateSiteSettingsRequest extends FormRequest
             'hero.highlight_text' => ['nullable', 'string'],
 
             'presentation.is_enabled' => ['boolean'],
+            'presentation.enable_read_more' => ['boolean'],
             'presentation.eyebrow' => ['nullable', 'string', 'max:255'],
             'presentation.title' => ['required', 'string', 'max:255'],
             'presentation.body' => ['required', 'string'],

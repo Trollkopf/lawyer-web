@@ -46,6 +46,7 @@ const form = useForm({
     },
     presentation: {
         is_enabled: props.settings.presentation?.is_enabled ?? true,
+        enable_read_more: props.settings.presentation?.enable_read_more ?? true,
         eyebrow: props.settings.presentation?.eyebrow ?? '',
         title: props.settings.presentation?.title ?? '',
         body: props.settings.presentation?.body ?? '',
@@ -101,6 +102,7 @@ const submit = () => {
         presentation: {
             ...data.presentation,
             is_enabled: data.presentation.is_enabled ? 1 : 0,
+            enable_read_more: data.presentation.enable_read_more ? 1 : 0,
         },
         services: {
             ...data.services,
@@ -325,6 +327,11 @@ const submit = () => {
                             v-model="form.presentation.is_enabled"
                             label="Mostrar presentacion en la home"
                             hint="Si lo desactivas, la seccion desaparece de la home y de la navegacion."
+                        />
+                        <AdminSectionSwitch
+                            v-model="form.presentation.enable_read_more"
+                            label='Activar "ver mas" en presentacion'
+                            hint="En movil se aplicara siempre; este ajuste controla sobre todo la version de escritorio."
                         />
                         <div>
                             <InputLabel for="presentation_eyebrow" value="Etiqueta" />

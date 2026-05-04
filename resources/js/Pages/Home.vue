@@ -188,7 +188,7 @@ onBeforeUnmount(() => {
 
         <main>
             <HeroSection :settings="settings" :hero-background-style="heroBackgroundStyle" />
-            <PresentationSection :settings="settings" :paragraphs="presentationParagraphs" />
+            <PresentationSection :settings="settings" :paragraphs="presentationParagraphs" :force-read-more="isMobileViewport" />
             <ServicesSection :settings="settings" :services="services" :force-read-more="isMobileViewport" />
             <TeamSection :settings="settings" :lawyers="lawyers" />
             <SuccessCasesSection :settings="settings" :success-cases="successCases" :force-read-more="isMobileViewport" />

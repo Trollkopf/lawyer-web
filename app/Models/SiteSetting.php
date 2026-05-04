@@ -66,6 +66,7 @@ class SiteSetting extends Model
             ],
             'presentation' => [
                 'is_enabled' => true,
+                'enable_read_more' => true,
                 'eyebrow' => 'Presentacion',
                 'title' => 'Cada asunto exige escucha, analisis y una estrategia bien definida.',
                 'body' => 'Nuestro despacho trabaja desde la claridad y la confianza, explicando cada fase del proceso para que el cliente pueda tomar decisiones con seguridad.',

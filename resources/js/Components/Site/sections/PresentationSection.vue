@@ -1,10 +1,11 @@
 <script setup>
+import { computed } from 'vue';
 import QuotePanel from '../cards/QuotePanel.vue';
 import RichParagraphs from '../content/RichParagraphs.vue';
 import SectionIntro from '../content/SectionIntro.vue';
 import { isSectionEnabled } from '../utils/site.js';
 
-defineProps({
+const props = defineProps({
     settings: {
         type: Object,
         required: true,
@@ -13,7 +14,18 @@ defineProps({
         type: Array,
         required: true,
     },
+    forceReadMore: {
+        type: Boolean,
+        default: false,
+    },
 });
+
+const allowExpand = computed(() => (
+    props.forceReadMore
+    || props.settings.presentation?.enable_read_more === true
+    || props.settings.presentation?.enable_read_more === 1
+    || props.settings.presentation?.enable_read_more === '1'
+));
 </script>
 
 <template>
@@ -34,7 +46,7 @@ defineProps({
             </div>
 
             <div class="mt-12">
-                <RichParagraphs :paragraphs="paragraphs" />
+                <RichParagraphs :paragraphs="paragraphs" :allow-expand="allowExpand" />
             </div>
         </div>
     </section>
